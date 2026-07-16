@@ -1,7 +1,0 @@
-gene,requested,available_in_current_GSE224445_targeted_panel,status
-CXCR6,True,True,available
-TCF7,True,True,available
-IFNG,True,True,available
-GZMB,True,True,available
-TOX,True,False,absent_in_current_targeted_panel
-PDCD1,True,True,available
