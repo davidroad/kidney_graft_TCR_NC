@@ -7,7 +7,9 @@ This repository provides the reproducible human computational analyses and light
 ## Repository contents
 
 - `scripts/`: reproducible scripts for Fig. 1G/Fig. 2B paired limma modeling and plotting, shared-clonotype T-cell cycle scoring, and HUMESS-derived figure generation.
-- `scripts/main_pipeline/`: the canonical `merge_8_all_R2.R` manuscript-scale analysis plus the split raw-to-intermediate and primary source-data export programs.
+- `scripts/raw_to_intermediate/`: functional programs for rebuilding the primary all-cell, T-cell/shared-clonotype, and CD8 intermediate objects.
+- `scripts/source_data_export/`: functional programs for exporting primary figure source tables and the shared-clone trajectory.
+- `scripts/primary_scrna_tcr_analysis.md`: main manuscript scRNA/TCR workflow and data contract.
 - `tables/`: de-identified sample-level source data and statistical results.
 - `provenance/`: analysis notes and R session information.
 - `DATA_AVAILABILITY.md`: public accessions and required processed inputs.
@@ -20,7 +22,7 @@ This repository provides the reproducible human computational analyses and light
 - The Fig. 2D shared-clonotype object contains 4,110 T cells, including CD8, CD4, and Treg annotations. Population-level cell-cycle metrics use this full shared-clonotype population, while the annotated CXCR6+ effector CD8 states retain the manuscript's CD8-focused biological context.
 - Patient/sample is the unit of inference. Cell-level tests are retained only as explicitly labeled exploratory source data.
 
-The full manuscript pipeline is documented in [`scripts/main_pipeline/README.md`](scripts/main_pipeline/README.md). The flat scripts in `scripts/` are downstream revision and figure-support analyses; they do not replace the main eight-sample integration and shared-TCR workflow.
+The full manuscript pipeline is documented in [`scripts/primary_scrna_tcr_analysis.md`](scripts/primary_scrna_tcr_analysis.md). The scripts in `scripts/revision/` are downstream revision and figure-support analyses; they are not substitutes for the main eight-sample integration and shared-TCR workflow.
 
 ## Running the analyses
 
@@ -34,14 +36,14 @@ conda activate kidney-graft-tcr-nc
 Recompute and plot Fig. 1G:
 
 ```bash
-Rscript scripts/recompute_fig1g_limma.R --repo . --out results/fig1g
-python scripts/plot_fig1g_limma_paired_barplot.py --out results/fig1g
+Rscript scripts/revision/recompute_fig1g_limma.R --repo . --out results/fig1g
+python scripts/revision/plot_fig1g_limma_paired_barplot.py --out results/fig1g
 ```
 
 Recompute Fig. 2B:
 
 ```bash
-Rscript scripts/recompute_fig2b_from_latest_tcell_object.R \
+Rscript scripts/revision/recompute_fig2b_from_latest_tcell_object.R \
   --input data/processed/merged_4_with_vdj_T_cells_filter_10_28_2025.RData \
   --out results/fig2b
 ```
@@ -49,13 +51,13 @@ Rscript scripts/recompute_fig2b_from_latest_tcell_object.R \
 Render the corrected Fig. 2B panel:
 
 ```bash
-python scripts/plot_fig2b_limma_barplot.py --out results/fig2b
+python scripts/revision/plot_fig2b_limma_barplot.py --out results/fig2b
 ```
 
 Recompute shared-clonotype T-cell cycle scores and figures:
 
 ```bash
-Rscript scripts/06_reviewer3_shared_clone_t_cell_cycle.R \
+Rscript scripts/revision/06_reviewer3_shared_clone_t_cell_cycle.R \
   --input data/processed/all_clone_filter_10_28.Rdata \
   --out results/shared_clone_t_cell_cycle
 ```
@@ -63,7 +65,7 @@ Rscript scripts/06_reviewer3_shared_clone_t_cell_cycle.R \
 Generate HUMESS-derived revision figures after staging the inputs described in `DATA_AVAILABILITY.md`:
 
 ```bash
-Rscript scripts/03_make_article_humess_visuals.R --repo .
+Rscript scripts/revision/03_make_article_humess_visuals.R --repo .
 ```
 
 Validate the lightweight public release:
