@@ -1,0 +1,5 @@
+comparison,group_a,group_b,n_a,n_b,mean_a,mean_b,p_value,p_value_4dp,sensitivity_p_value,test,biological_unit,note
+PBMC:Rejection vs PBMC:TOT,PBMC:Rejection,PBMC:TOT,4,4,23.106504422036558,1.79836249862428,0.02857142857142857,0.0286,,two-sided exact Mann-Whitney/Wilcoxon rank-sum,independent_sample_tag,Cross-cohort comparison; sample/tag is the biological unit.
+PBMC:Rejection vs PBMC:STA,PBMC:Rejection,PBMC:STA,4,4,23.106504422036558,6.504318545877895,0.05714285714285714,0.0571,,two-sided exact Mann-Whitney/Wilcoxon rank-sum,independent_sample_tag,Cross-cohort comparison; sample/tag is the biological unit.
+PBMC:Rejection vs PBMC:BPAR,PBMC:Rejection,PBMC:BPAR,4,4,23.106504422036558,5.09968722932976,0.05714285714285714,0.0571,,two-sided exact Mann-Whitney/Wilcoxon rank-sum,independent_sample_tag,Cross-cohort comparison; sample/tag is the biological unit.
+Graft:Rejection vs PBMC:Rejection,Graft:Rejection,PBMC:Rejection,4,4,60.525292314316275,23.106504422036558,0.00709842627527682,0.0071,0.125,paired two-sided t test; paired Wilcoxon sensitivity,paired_patient,GSE224445 groups use GEO-mapped sample tags; Graft/PBMC are paired by patient.

@@ -1,0 +1,41 @@
+source,context,sample_id,biological_unit,n_cd8,n_cxcr6_positive,cxcr6_frequency_pct,mean_cxcr6_expression,expression_metric,context_label,reviewer_group,cxcr6_frequency_definition,biological_unit_definition
+GSE224445,GSE224445 TOT PBMC,Bead1_Tag01,GEO sample tag,61,0,0.0,0.0,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE TOT
+n=4",PBMC:TOT,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
+GSE224445,GSE224445 TOT PBMC,Bead1_Tag02,GEO sample tag,960,16,1.66666666666667,0.0641330163489121,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE TOT
+n=4",PBMC:TOT,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
+GSE224445,GSE224445 TOT PBMC,Bead1_Tag04,GEO sample tag,955,35,3.66492146596859,0.142275666194141,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE TOT
+n=4",PBMC:TOT,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
+GSE224445,GSE224445 TOT PBMC,Bead3_Tag09,GEO sample tag,1665,31,1.86186186186186,0.0719942695246674,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE TOT
+n=4",PBMC:TOT,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
+GSE224445,GSE224445 STA PBMC,Bead0_Tag07,GEO sample tag,969,148,15.2734778121775,0.670056748406754,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE STA
+n=4",PBMC:STA,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
+GSE224445,GSE224445 STA PBMC,Bead0_Tag08,GEO sample tag,116,5,4.31034482758621,0.197663769101037,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE STA
+n=4",PBMC:STA,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
+GSE224445,GSE224445 STA PBMC,Bead2_Tag07,GEO sample tag,786,32,4.07124681933842,0.156194511846863,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE STA
+n=4",PBMC:STA,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
+GSE224445,GSE224445 STA PBMC,Bead2_Tag08,GEO sample tag,127,3,2.36220472440945,0.111195621325596,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE STA
+n=4",PBMC:STA,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
+GSE224445,GSE224445 BPAR PBMC,Bead0_Tag05,GEO sample tag,691,88,12.7351664254703,0.494132219588956,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE BPAR
+n=4",PBMC:BPAR,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
+GSE224445,GSE224445 BPAR PBMC,Bead0_Tag06,GEO sample tag,1198,38,3.17195325542571,0.135483365266601,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE BPAR
+n=4",PBMC:BPAR,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
+GSE224445,GSE224445 BPAR PBMC,Bead2_Tag05,GEO sample tag,79,1,1.26582278481013,0.0593290873428557,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE BPAR
+n=4",PBMC:BPAR,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
+GSE224445,GSE224445 BPAR PBMC,Bead2_Tag06,GEO sample tag,93,3,3.2258064516129,0.147338160789711,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE BPAR
+n=4",PBMC:BPAR,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
+This study,Our rejection PBMC,Patient 701,patient,163,75,46.0122699386503,0.820121376198487,10x whole-transcriptome Seurat log-normalized RNA,"Our PBMC
+n=4",PBMC:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
+This study,Our rejection PBMC,Patient 708,patient,168,39,23.2142857142857,0.319236952199795,10x whole-transcriptome Seurat log-normalized RNA,"Our PBMC
+n=4",PBMC:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
+This study,Our rejection PBMC,Patient 712,patient,1176,79,6.7176870748299295,0.100668690798247,10x whole-transcriptome Seurat log-normalized RNA,"Our PBMC
+n=4",PBMC:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
+This study,Our rejection PBMC,Patient 825,patient,1262,208,16.4817749603803,0.253420221916912,10x whole-transcriptome Seurat log-normalized RNA,"Our PBMC
+n=4",PBMC:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
+This study,Our rejected graft,Patient 701,patient,3175,2240,70.55118110236221,1.32124051645486,10x whole-transcriptome Seurat log-normalized RNA,"Our graft
+n=4",Graft:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
+This study,Our rejected graft,Patient 708,patient,1990,1131,56.834170854271406,1.06769854431991,10x whole-transcriptome Seurat log-normalized RNA,"Our graft
+n=4",Graft:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
+This study,Our rejected graft,Patient 712,patient,4333,2023,46.6882067851373,0.873525047045543,10x whole-transcriptome Seurat log-normalized RNA,"Our graft
+n=4",Graft:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
+This study,Our rejected graft,Patient 825,patient,6809,4632,68.0276105154942,1.3418114647822,10x whole-transcriptome Seurat log-normalized RNA,"Our graft
+n=4",Graft:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
