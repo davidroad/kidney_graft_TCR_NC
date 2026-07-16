@@ -10,7 +10,6 @@ This repository provides the reproducible human computational workflow for the p
 - `scripts/raw_to_intermediate/`: functional programs for rebuilding the primary all-cell, T-cell/shared-clonotype, and CD8 intermediate objects.
 - `scripts/source_data_export/`: functional programs for exporting primary figure source tables and the shared-clone trajectory.
 - `scripts/primary_scrna_tcr_analysis.md`: main manuscript scRNA/TCR workflow and data contract.
-- `tables/`: de-identified sample-level source data and statistical results.
 - `provenance/`: analysis notes and R session information.
 - `DATA_AVAILABILITY.md`: public accessions and required processed inputs.
 - `environment.yml`: reproducible software environment.
@@ -66,12 +65,6 @@ Generate HUMESS-derived revision figures after staging the inputs described in `
 
 ```bash
 Rscript scripts/revision/03_make_article_humess_visuals.R --repo .
-```
-
-Validate the lightweight public release:
-
-```bash
-Rscript scripts/validate_release.R
 ```
 
 ## Corrected paired results
