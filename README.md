@@ -2,11 +2,11 @@
 
 Long-term alloimmune responses can persist for years after transplantation, but the cellular organization that sustains them remains incompletely understood. The accompanying study combines paired single-cell RNA sequencing and TCR sequencing from rejected human kidney allografts and peripheral blood collected approximately a decade after transplantation. TCR clonotypes shared between blood and graft connect circulating TCF1+ stem-like CD8 T cells with graft-infiltrating CXCR6+ cytotoxic effector states, supporting a model in which a persistent stem-like reservoir repeatedly replenishes short-lived effectors during ongoing rejection.
 
-This repository provides the reproducible human computational analyses and lightweight source data supporting the single-cell/TCR and revision components of the study. It includes paired cluster-composition modeling, shared-clonotype and cell-cycle analyses, CXCR6-focused comparisons, and transcriptional metabolic analyses. Large processed objects and raw sequencing data are provided through the linked Figshare and GEO records rather than stored in GitHub.
+This repository provides the reproducible human computational workflow for the primary single-cell/TCR analyses in the study, together with downstream revision modules. The primary route rebuilds the integrated all-CD45 and T-cell objects, TCR clonotypes, shared graft/PBMC clonotypes, and main-figure source tables. Revision modules then add paired limma models, cell-cycle, CXCR6, metabolic, HUMESS, and external-PBMC analyses. Large processed objects and raw sequencing data are provided through the linked Figshare and GEO records rather than stored in GitHub.
 
 ## Repository contents
 
-- `scripts/`: reproducible scripts for Fig. 1G/Fig. 2B paired limma modeling and plotting, shared-clonotype T-cell cycle scoring, and HUMESS-derived figure generation.
+- `scripts/revision/`: downstream revision and figure-support analyses, including paired limma modeling, cell-cycle, CXCR6, metabolic, HUMESS, and external-PBMC analyses.
 - `scripts/raw_to_intermediate/`: functional programs for rebuilding the primary all-cell, T-cell/shared-clonotype, and CD8 intermediate objects.
 - `scripts/source_data_export/`: functional programs for exporting primary figure source tables and the shared-clone trajectory.
 - `scripts/primary_scrna_tcr_analysis.md`: main manuscript scRNA/TCR workflow and data contract.
@@ -82,4 +82,4 @@ For Fig. 1G, clusters 0, 2, 4, 5, 6, 8, 9, and 11 have FDR < 0.05. For Fig. 2B, 
 
 Please cite the associated Nature Communications article and the Figshare data and reproducibility record:
 
-> Dai Y. *Kidney graft TCR clonotype analysis: revision figures, source data, and reproducibility files*. Figshare. 2026. https://doi.org/10.6084/m9.figshare.33001412.v1
+> Dai Y. *Kidney graft TCR clonotype analysis: primary scRNA/TCR workflow, source data, and revision analyses*. Figshare. 2026. https://doi.org/10.6084/m9.figshare.33001412.v2
