@@ -1,0 +1,10 @@
+sample_id,patient_id,tissue,batch_label,matrix_dir,vdj_dir,existing_seurat_rdata,existing_seurat_object
+PBMC_0701,0701,PBMC,PBMC_0701,/path/to/PBMC_0701/count/sample_filtered_feature_bc_matrix,/path/to/PBMC_0701/vdj_t,,
+PBMC_0708,0708,PBMC,PBMC_0708,/path/to/PBMC_0708/count/sample_filtered_feature_bc_matrix,/path/to/PBMC_0708/vdj_t,,
+PBMC_0712,0712,PBMC,PBMC_0712,/path/to/PBMC_0712/count/sample_filtered_feature_bc_matrix,/path/to/PBMC_0712/vdj_t,,
+PBMC_0825,0825,PBMC,PBMC_0825,/path/to/PBMC_0825/count/sample_filtered_feature_bc_matrix,/path/to/PBMC_0825/vdj_t,,
+graft_0701,0701,Graft,graft_0701,/path/to/Graft_0701/count/sample_filtered_feature_bc_matrix,/path/to/Graft_0701/vdj_t,,
+graft_0708,0708,Graft,graft_0708,/path/to/Graft_0708/count/sample_filtered_feature_bc_matrix,/path/to/Graft_0708/vdj_t,,
+graft_0712,0712,Graft,graft_0712,/path/to/Graft_0712/count/sample_filtered_feature_bc_matrix,/path/to/Graft_0712/vdj_t,,
+graft_0825,0825,Graft,graft_0825,/path/to/Graft_0825/count/sample_filtered_feature_bc_matrix,/path/to/Graft_0825/vdj_t,,
+

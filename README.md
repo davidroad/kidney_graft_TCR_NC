@@ -7,6 +7,7 @@ This repository provides the reproducible human computational analyses and light
 ## Repository contents
 
 - `scripts/`: reproducible scripts for Fig. 1G/Fig. 2B paired limma modeling and plotting, shared-clonotype T-cell cycle scoring, and HUMESS-derived figure generation.
+- `scripts/main_pipeline/`: the canonical `merge_8_all_R2.R` manuscript-scale analysis plus the split raw-to-intermediate and primary source-data export programs.
 - `tables/`: de-identified sample-level source data and statistical results.
 - `provenance/`: analysis notes and R session information.
 - `DATA_AVAILABILITY.md`: public accessions and required processed inputs.
@@ -18,6 +19,8 @@ This repository provides the reproducible human computational analyses and light
 - Fig. 2B contains 11 annotated T-cell clusters measured in the same four matched pairs. One `11 clusters x 8 samples` bounded-logit matrix is fitted using the same donor-blocked model; BH correction is applied across 11 clusters.
 - The Fig. 2D shared-clonotype object contains 4,110 T cells, including CD8, CD4, and Treg annotations. Population-level cell-cycle metrics use this full shared-clonotype population, while the annotated CXCR6+ effector CD8 states retain the manuscript's CD8-focused biological context.
 - Patient/sample is the unit of inference. Cell-level tests are retained only as explicitly labeled exploratory source data.
+
+The full manuscript pipeline is documented in [`scripts/main_pipeline/README.md`](scripts/main_pipeline/README.md). The flat scripts in `scripts/` are downstream revision and figure-support analyses; they do not replace the main eight-sample integration and shared-TCR workflow.
 
 ## Running the analyses
 
