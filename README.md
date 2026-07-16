@@ -20,6 +20,7 @@ This repository provides the reproducible human computational workflow for the p
 - Fig. 1G contains 28 CD45+ clusters measured in four matched graft/PBMC pairs. One `28 clusters x 8 samples` bounded-logit matrix is fitted with `limma::lmFit` and one `eBayes` call using `~ patient + condition`; BH correction is applied across 28 clusters.
 - Fig. 2B contains 11 annotated T-cell clusters measured in the same four matched pairs. One `11 clusters x 8 samples` bounded-logit matrix is fitted using the same donor-blocked model; BH correction is applied across 11 clusters.
 - The Fig. 2D shared-clonotype object contains 4,110 T cells, including CD8, CD4, and Treg annotations. Population-level cell-cycle metrics use this full shared-clonotype population, while the annotated CXCR6+ effector CD8 states retain the manuscript's CD8-focused biological context.
+- The Fig. 2I Monocle 3 trajectory was rooted in the TCF7-defined stem-like T-cell state, with pseudotime progressing toward differentiated effector states.
 - Patient/sample is the unit of inference. Cell-level tests are retained only as explicitly labeled exploratory source data.
 
 The full manuscript pipeline is documented in [`scripts/primary_scrna_tcr_analysis.md`](scripts/primary_scrna_tcr_analysis.md). The scripts in `scripts/revision/` are downstream revision and figure-support analyses; they are not substitutes for the main eight-sample integration and shared-TCR workflow.

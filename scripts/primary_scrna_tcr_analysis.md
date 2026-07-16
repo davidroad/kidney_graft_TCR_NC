@@ -24,8 +24,9 @@ converts the RNA count matrix and metadata to a `cell_data_set`, inserts the
 existing Seurat UMAP coordinates for visualization consistency, runs
 `cluster_cells`, `learn_graph`, and `order_cells`, and plots cells colored by
 pseudotime and annotated T-cell state. The pseudotime start/root point was
-selected from the stem-like T-cell population through the interactive Monocle 3
-`order_cells()` interface. The intermediate Monocle `cell_data_set`
+selected from the TCF7-defined stem-like T-cell state through the interactive
+Monocle 3 `order_cells()` interface. Pseudotime then progressed toward
+differentiated effector states. The intermediate Monocle `cell_data_set`
 object was not retained as a deposited object because it can be regenerated
 from this intermediate and code.
 

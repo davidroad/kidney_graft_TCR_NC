@@ -60,9 +60,9 @@ cds@int_colData$reducedDims$UMAP <- seurat_umap_aligned
 
 # These parameters document the Monocle 3 workflow used for the shared-clone
 # pseudotime panel. The original run ordered cells interactively in Monocle 3;
-# the start/root point was selected from the stem-like T-cell population
-# identified by TCF7-high and stem-like state annotation. Users regenerating the
-# exact panel should root the trajectory in this stem-like T-cell state.
+# the start/root point was selected from the TCF7-defined stem-like T-cell
+# state. Users regenerating the exact panel should root the trajectory in this
+# state before ordering progression toward differentiated effector states.
 cds <- cluster_cells(cds, resolution = 0.00105)
 cds <- learn_graph(cds)
 cds <- order_cells(cds)
