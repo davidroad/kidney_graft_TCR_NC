@@ -4,6 +4,12 @@
 .DS_Store
 data/processed/
 results/
+tables/
+figures/
+*.csv
+*.tsv
+*.xls
+*.xlsx
 *.RData
 *.Rdata
 *.rds

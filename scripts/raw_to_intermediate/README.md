@@ -4,15 +4,18 @@ This folder gives a cleaned route from deposited scRNA-seq/TCR-seq data to the p
 
 ## Inputs
 
-Prepare `sample_manifest.csv` from `sample_manifest_template.csv`. Each row should provide:
+Create a local `sample_manifest.csv` that is not committed to GitHub. Each row should provide these fields:
 
-- sample identifier
-- patient identifier
-- tissue/source label
-- Cell Ranger filtered feature matrix directory
-- matching TCR `vdj_t` directory containing `filtered_contig_annotations.csv` and `clonotypes.csv`
+- `sample_id`: sample identifier
+- `patient_id`: anonymized patient identifier
+- `tissue`: `PBMC` or `Graft`
+- `batch_label`: label used during integration
+- `matrix_dir`: Cell Ranger filtered feature matrix directory
+- `vdj_dir`: matching TCR `vdj_t` directory containing `filtered_contig_annotations.csv` and `clonotypes.csv`
+- `existing_seurat_rdata`: optional prebuilt per-sample Seurat RData path
+- `existing_seurat_object`: optional object name in that RData file
 
-If starting from a prebuilt per-sample Seurat object, fill `existing_seurat_rdata` and `existing_seurat_object`.
+The manifest is a local input configuration and must remain outside version control.
 
 ## Outputs
 
@@ -23,4 +26,3 @@ If starting from a prebuilt per-sample Seurat object, fill `existing_seurat_rdat
 - `merged_4_with_vdj_CD8_T_cells_filter_10_28_2025.RData`: CD8 subset used for revision metabolic analysis.
 
 The date-stamped filenames match the analysis provenance. These large objects are not part of the default figshare source-data deposit.
-
