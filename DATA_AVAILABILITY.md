@@ -24,4 +24,4 @@ Expected RData object names:
 - `merged_4_with_vdj_T_cells_filter_10_28_2025.RData`: `merged_all_T_batchcorrected_filter`
 - `all_clone_filter_10_28.Rdata`: `all_clone_test_filter`
 
-Figshare DOI: [`10.6084/m9.figshare.33001412.v1`](https://doi.org/10.6084/m9.figshare.33001412.v2). The final Nature Communications citation should be added after journal publication.
+Figshare DOI: [`10.6084/m9.figshare.33001412.v2`](https://doi.org/10.6084/m9.figshare.33001412.v2). The final Nature Communications citation should be added after journal publication.
