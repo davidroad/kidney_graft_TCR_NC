@@ -1,12 +1,12 @@
-# scVDJ Revision Analysis Delivery
+# Kidney Graft TCR Analysis
 
-This delivery contains the reviewer-requested bioinformatics and biostatistics outputs for the scVDJ transplant study revision.
+This repository contains analysis code and lightweight source data for a paired human kidney graft/PBMC single-cell RNA-seq and TCR-seq study. The project examines how shared TCR clonotypes connect circulating and graft-infiltrating T-cell states, with focused analyses of CXCR6-associated differentiation, T-cell cluster composition, transcriptional metabolic programs, and in situ cell-cycle activity.
 
-Contents:
+The repository is organized as follows:
 
-- `Yuli_Dai_Revision_updated.pptx`: the reviewer revision presentation with figure and table locations shown on the corresponding pages.
-- `collaborator_delivery.zip`: the minimal collaborator package containing only the requested PDF figures, exact source tables, response letter, and issue map.
-- `github_repository_submission.zip`: the code, source tables, response materials, figures, and provenance intended for the GitHub repository.
-- `figshare_deposit_submission.zip`: the release package intended for Figshare deposition.
+- `scripts/`: R scripts for the reviewer-stage Fig. 2B, metabolic-support, and shared-clone cell-cycle analyses.
+- `tables/`: sample-level source data and statistical result tables used in the revision analyses.
+- `documents/`: analysis notes and response materials retained during revision.
+- `provenance/`: file-integrity records for the staged release.
 
-The analyses include paired Fig. 2B cluster-frequency modeling with limma empirical-Bayes moderation, HUMESS metabolic-support summaries, external GSE224445 CXCR6 analysis, and Seurat G2/M cell-cycle scoring of 4,110 shared-TCR-clone CD8+ cells. Exact datapoints and statistical summaries are provided in the source tables.
+Large sequencing matrices and processed Seurat/HUMESS objects are not stored in this GitHub repository. Public accessions and the associated Figshare record should be used for data access once the release is finalized.
