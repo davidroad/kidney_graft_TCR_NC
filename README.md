@@ -2,13 +2,14 @@
 
 Long-term alloimmune responses can persist for years after transplantation, but the cellular organization that sustains them remains incompletely understood. The accompanying study combines paired single-cell RNA sequencing and TCR sequencing from rejected human kidney allografts and peripheral blood collected approximately a decade after transplantation. TCR clonotypes shared between blood and graft connect circulating TCF1+ stem-like CD8 T cells with graft-infiltrating CXCR6+ cytotoxic effector states, supporting a model in which a persistent stem-like reservoir repeatedly replenishes short-lived effectors during ongoing rejection.
 
-This repository provides the reproducible human computational workflow for the primary single-cell/TCR analyses in the study, together with downstream revision modules. The primary route rebuilds the integrated all-CD45 and T-cell objects, TCR clonotypes, shared graft/PBMC clonotypes, and main-figure source tables. Revision modules then add paired limma models, cell-cycle, CXCR6, metabolic, HUMESS, and external-PBMC analyses. Large processed objects and raw sequencing data are provided through the linked Figshare and GEO records rather than stored in GitHub.
+This repository provides the reproducible human computational workflow for the primary single-cell/TCR analyses in the study, together with downstream revision modules. The primary route rebuilds the integrated all-CD45 and T-cell objects, TCR clonotypes, shared graft/PBMC clonotypes, and main-figure source tables. Revision modules then add paired limma models, cell-cycle, CXCR6, metabolic, HUMESS, and external-PBMC analyses. Raw sequencing data are available from the documented GEO accessions, while lightweight plotting metrics and source tables are provided through Figshare; large processed objects are not stored in either public code package.
 
 ## Repository contents
 
 - `scripts/revision/`: downstream revision and figure-support analyses, including paired limma modeling, cell-cycle, CXCR6, metabolic, HUMESS, and external-PBMC analyses.
 - `scripts/raw_to_intermediate/`: functional programs for rebuilding the primary all-cell, T-cell/shared-clonotype, and CD8 intermediate objects.
 - `scripts/source_data_export/`: functional programs for exporting primary figure source tables and the shared-clone trajectory.
+- `scripts/reproducibility/`: metrics exporters and plotting wrappers for rebuilding manuscript computational panels from the lightweight Figshare metrics.
 - `scripts/primary_scrna_tcr_analysis.md`: main manuscript scRNA/TCR workflow and data contract.
 - `provenance/`: analysis notes and R session information.
 - `DATA_AVAILABILITY.md`: public accessions and required processed inputs.
@@ -67,6 +68,17 @@ Generate HUMESS-derived revision figures after staging the inputs described in `
 Rscript scripts/revision/03_make_article_humess_visuals.R --repo .
 ```
 
+After downloading the lightweight plotting metrics from Figshare, regenerate primary computational panels without a Seurat object:
+
+```bash
+Rscript scripts/reproducibility/01_plot_figure1_from_metrics.R \
+  figshare/inputs/plotting_inputs results/figure_1
+Rscript scripts/reproducibility/02_plot_figure2_from_metrics.R \
+  figshare/inputs/plotting_inputs results/figure_2
+```
+
+The metrics exporter documents how those public inputs are derived from locally reconstructed Seurat objects. Large `.RData`/`.rds` objects and raw matrices are not stored in this repository.
+
 ## Corrected paired results
 
 For Fig. 1G, clusters 0, 2, 4, 5, 6, 8, 9, and 11 have FDR < 0.05. For Fig. 2B, `CXCL13+CXCR6+ effector CD8+` is higher in graft, whereas `CCR2+ CD4+` and `Naive CD4+` are lower in graft at FDR < 0.05. `CXCR6+ effector CD8+` has raw p = 0.0331 but FDR = 0.0910. These estimates are based on four matched patients and should be interpreted as paired cohort evidence rather than population-level prevalence estimates.
@@ -75,4 +87,4 @@ For Fig. 1G, clusters 0, 2, 4, 5, 6, 8, 9, and 11 have FDR < 0.05. For Fig. 2B, 
 
 Please cite the associated Nature Communications article and the Figshare data and reproducibility record:
 
-> Dai Y. *Kidney graft TCR clonotype analysis: primary scRNA/TCR workflow, source data, and revision analyses*. Figshare. 2026. https://doi.org/10.6084/m9.figshare.33001412.v2
+> Dai Y. *Kidney graft TCR clonotype analysis: primary scRNA/TCR workflow, source data, and revision analyses*. Figshare. 2026. https://doi.org/10.6084/m9.figshare.33001412
