@@ -1,6 +1,8 @@
 # Kidney Graft TCR Analysis
 
-This repository contains reproducible analysis code and lightweight source data for a paired human kidney graft/PBMC single-cell RNA-seq and TCR-seq study. The study examines how TCR clonotypes shared between blood and graft connect circulating stem-like and graft-infiltrating T-cell states, with focused analyses of CXCR6-associated differentiation, T-cell cluster composition, transcriptional metabolic programs, and in situ cell-cycle activity.
+Long-term alloimmune responses can persist for years after transplantation, but the cellular organization that sustains them remains incompletely understood. The accompanying study combines paired single-cell RNA sequencing and TCR sequencing from rejected human kidney allografts and peripheral blood collected approximately a decade after transplantation. TCR clonotypes shared between blood and graft connect circulating TCF1+ stem-like CD8 T cells with graft-infiltrating CXCR6+ cytotoxic effector states, supporting a model in which a persistent stem-like reservoir repeatedly replenishes short-lived effectors during ongoing rejection.
+
+This repository provides the reproducible human computational analyses and lightweight source data supporting the single-cell/TCR and revision components of the study. It includes paired cluster-composition modeling, shared-clonotype and cell-cycle analyses, CXCR6-focused comparisons, and transcriptional metabolic analyses. Large processed objects and raw sequencing data are provided through the linked Figshare and GEO records rather than stored in GitHub.
 
 ## Repository contents
 
