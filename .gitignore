@@ -1,0 +1,11 @@
+.Rhistory
+.RData
+.Rproj.user/
+.DS_Store
+data/processed/
+results/
+*.RData
+*.Rdata
+*.rds
+__pycache__/
+*.pyc

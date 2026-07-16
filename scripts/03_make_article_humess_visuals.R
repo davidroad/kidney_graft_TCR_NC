@@ -1,7 +1,6 @@
 #!/usr/bin/env Rscript
 
 options(stringsAsFactors = FALSE)
-.libPaths(c("/data_sys/collab2/ydai2/26_immune_NC/R_libs/4.5.0", .libPaths()))
 
 suppressPackageStartupMessages({
   library(ggplot2)
@@ -14,8 +13,14 @@ suppressPackageStartupMessages({
   library(ggrepel)
 })
 
-root_dir <- normalizePath(getwd(), mustWork = TRUE)
-out_dir <- file.path(root_dir, "results", "article_humess_alignment")
+args <- commandArgs(trailingOnly = TRUE)
+arg_value <- function(flag, default = NULL) {
+  pos <- match(flag, args)
+  if (is.na(pos) || pos == length(args)) default else args[[pos + 1L]]
+}
+
+root_dir <- normalizePath(arg_value("--repo", getwd()), mustWork = TRUE)
+out_dir <- arg_value("--out", file.path(root_dir, "results", "article_humess_alignment"))
 dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
 overview_width <- 13.2
 overview_height <- 6.8
@@ -32,16 +37,37 @@ reporter_file <- file.path(
 )
 humess_model_dir <- file.path(root_dir, "results", "reviewer2_metabolic_profile", "humess", "humess_run", "models")
 
+required_inputs <- c(scores_file, logcpm_file, counts_file, edge_file, reporter_file)
+missing_inputs <- required_inputs[!file.exists(required_inputs)]
+if (length(missing_inputs)) {
+  stop(
+    "Required HUMESS-derived input files are missing:\n- ",
+    paste(missing_inputs, collapse = "\n- "),
+    "\nSee README.md for the expected input layout."
+  )
+}
+
 glycolysis_score_genes <- c(
   "HK1", "HK2", "GPI", "PFKL", "PFKP", "ALDOA", "GAPDH", "PGK1",
   "PGAM1", "ENO1", "ENO2", "PKM", "LDHA", "LDHB", "SLC2A1",
   "G6PC3", "AKR1A1"
 )
 
-scores <- read_tsv(scores_file, show_col_types = FALSE) %>%
+scores <- read_tsv(scores_file, show_col_types = FALSE)
+patient_levels <- sort(unique(as.character(scores$patient)))
+if (length(patient_levels) != 4L) stop("Expected four patient identifiers in the metabolic-score input.")
+patient_map <- setNames(paste0("P", seq_along(patient_levels)), patient_levels)
+public_patient <- function(x) unname(patient_map[as.character(x)])
+public_sample_name <- function(x) {
+  out <- x
+  for (id in names(patient_map)) out <- str_replace_all(out, fixed(id), patient_map[[id]])
+  out
+}
+
+scores <- scores %>%
   mutate(
     condition = factor(condition, levels = c("PBMC", "Graft")),
-    patient = factor(patient),
+    patient = factor(public_patient(patient), levels = paste0("P", 1:4)),
     stem_like_annotation = if_else(stem_like_annotation, "TCF7hi stem-like", "Other CD8")
   )
 
@@ -49,6 +75,8 @@ edge <- read_tsv(edge_file, show_col_types = FALSE)
 reporter <- read_tsv(reporter_file, show_col_types = FALSE)
 logcpm_source <- read_tsv(logcpm_file, show_col_types = FALSE)
 counts_source <- read_tsv(counts_file, show_col_types = FALSE)
+names(logcpm_source) <- public_sample_name(names(logcpm_source))
+names(counts_source) <- public_sample_name(names(counts_source))
 
 pal_condition <- c(PBMC = "#3B5A7A", Graft = "#B33A3A")
 pal_fill <- c(PBMC = "#C9D5E3", Graft = "#E7B4AE")
@@ -497,7 +525,7 @@ panel_e_labels <- pseudobulk_metric %>%
   mutate(
     x_base = as.numeric(factor(condition, levels = c("PBMC", "Graft"))),
     x_num = x_base + ifelse(condition == "PBMC", -0.12, 0.12),
-    y_label = mean_glycolysis_logCPM + c("0701" = 0.10, "0708" = -0.10, "0712" = 0.10, "0825" = -0.10)[patient],
+    y_label = mean_glycolysis_logCPM + c("P1" = 0.10, "P2" = -0.10, "P3" = 0.10, "P4" = -0.10)[patient],
     hjust_label = ifelse(condition == "PBMC", 1, 0)
   )
 panel_e_lines <- pseudobulk_metric %>%
