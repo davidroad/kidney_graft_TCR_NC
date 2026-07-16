@@ -23,19 +23,19 @@ GSE224445,GSE224445 BPAR PBMC,Bead2_Tag05,GEO sample tag,79,1,1.26582278481013,0
 n=4",PBMC:BPAR,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
 GSE224445,GSE224445 BPAR PBMC,Bead2_Tag06,GEO sample tag,93,3,3.2258064516129,0.147338160789711,BD Rhapsody targeted panel Seurat log-normalized RNA,"GSE BPAR
 n=4",PBMC:BPAR,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,GEO sample tag
-This study,Our rejection PBMC,Patient 701,patient,163,75,46.0122699386503,0.820121376198487,10x whole-transcriptome Seurat log-normalized RNA,"Our PBMC
+This study,Our rejection PBMC,P1,patient,163,75,46.0122699386503,0.820121376198487,10x whole-transcriptome Seurat log-normalized RNA,"Our PBMC
 n=4",PBMC:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
-This study,Our rejection PBMC,Patient 708,patient,168,39,23.2142857142857,0.319236952199795,10x whole-transcriptome Seurat log-normalized RNA,"Our PBMC
+This study,Our rejection PBMC,P2,patient,168,39,23.2142857142857,0.319236952199795,10x whole-transcriptome Seurat log-normalized RNA,"Our PBMC
 n=4",PBMC:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
-This study,Our rejection PBMC,Patient 712,patient,1176,79,6.7176870748299295,0.100668690798247,10x whole-transcriptome Seurat log-normalized RNA,"Our PBMC
+This study,Our rejection PBMC,P3,patient,1176,79,6.7176870748299295,0.100668690798247,10x whole-transcriptome Seurat log-normalized RNA,"Our PBMC
 n=4",PBMC:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
-This study,Our rejection PBMC,Patient 825,patient,1262,208,16.4817749603803,0.253420221916912,10x whole-transcriptome Seurat log-normalized RNA,"Our PBMC
+This study,Our rejection PBMC,P4,patient,1262,208,16.4817749603803,0.253420221916912,10x whole-transcriptome Seurat log-normalized RNA,"Our PBMC
 n=4",PBMC:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
-This study,Our rejected graft,Patient 701,patient,3175,2240,70.55118110236221,1.32124051645486,10x whole-transcriptome Seurat log-normalized RNA,"Our graft
+This study,Our rejected graft,P1,patient,3175,2240,70.55118110236221,1.32124051645486,10x whole-transcriptome Seurat log-normalized RNA,"Our graft
 n=4",Graft:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
-This study,Our rejected graft,Patient 708,patient,1990,1131,56.834170854271406,1.06769854431991,10x whole-transcriptome Seurat log-normalized RNA,"Our graft
+This study,Our rejected graft,P2,patient,1990,1131,56.834170854271406,1.06769854431991,10x whole-transcriptome Seurat log-normalized RNA,"Our graft
 n=4",Graft:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
-This study,Our rejected graft,Patient 712,patient,4333,2023,46.6882067851373,0.873525047045543,10x whole-transcriptome Seurat log-normalized RNA,"Our graft
+This study,Our rejected graft,P3,patient,4333,2023,46.6882067851373,0.873525047045543,10x whole-transcriptome Seurat log-normalized RNA,"Our graft
 n=4",Graft:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient
-This study,Our rejected graft,Patient 825,patient,6809,4632,68.0276105154942,1.3418114647822,10x whole-transcriptome Seurat log-normalized RNA,"Our graft
+This study,Our rejected graft,P4,patient,6809,4632,68.0276105154942,1.3418114647822,10x whole-transcriptome Seurat log-normalized RNA,"Our graft
 n=4",Graft:Rejection,CXCR6-positive strict-CD8 cells / all strict-CD8 cells * 100,patient

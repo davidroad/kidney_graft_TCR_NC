@@ -1,0 +1,21 @@
+name: kidney-graft-tcr-nc
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - r-base=4.5
+  - r-seurat
+  - bioconductor-limma
+  - r-ggplot2
+  - r-dplyr
+  - r-tidyr
+  - r-readr
+  - r-stringr
+  - r-patchwork
+  - r-cowplot
+  - r-ggrepel
+  - python
+  - pymupdf
+  - pandas
+  - numpy
+  - matplotlib
