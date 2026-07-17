@@ -129,7 +129,7 @@ make_panel <- function(gene, condition, show_title = FALSE) {
   }
 
   dat <- dat[order(dat[[rel_col]], na.last = TRUE), , drop = FALSE]
-  point_size <- if (dataset == "GSE224445") 0.16 else 0.10
+  point_size <- if (dataset == "GSE224445") 0.80 else 0.50
   ggplot(dat, aes(x = umap_1, y = umap_2, colour = .data[[rel_col]])) +
     geom_point(size = point_size, alpha = 0.9, stroke = 0) +
     scale_colour_gradientn(
