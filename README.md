@@ -69,6 +69,23 @@ Generate HUMESS-derived revision figures after staging the inputs described in `
 Rscript scripts/revision/03_make_article_humess_visuals.R --repo .
 ```
 
+Generate the reviewer-requested five-group marker plots and TCF7+CXCR6+ frequency summaries after reconstructing both CD8 objects:
+
+```bash
+Rscript scripts/revision/07_generate_reviewer2_five_group_featureplots.R \
+  data/processed/merged_4_with_vdj_CD8_T_cells_filter_10_28_2025.RData \
+  data/processed/GSE224445_strict_cd8_seurat.rds results/reviewer2
+Rscript scripts/revision/09_summarize_reviewer2_tcf7_cxcr6_double_positive.R \
+  data/processed/merged_4_with_vdj_CD8_T_cells_filter_10_28_2025.RData \
+  data/processed/GSE224445_strict_cd8_seurat.rds results/reviewer2
+Rscript scripts/revision/08_recompute_reviewer2_cxcr6_limma.R \
+  data/processed/merged_4_with_vdj_CD8_T_cells_filter_10_28_2025.RData \
+  data/processed/GSE224445_strict_cd8_seurat.rds \
+  results/reviewer2/requested_cxcr6_contrasts_limma_ebayes.csv
+```
+
+The cross-cohort limma contrasts use all genes shared by the two assays for variance moderation, but remain exploratory because platform and cohort are confounded. `TOX` is absent from the GSE224445 targeted panel and is not imputed.
+
 After downloading the lightweight plotting metrics from Figshare, regenerate primary computational panels without a Seurat object:
 
 ```bash
