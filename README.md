@@ -86,6 +86,8 @@ Rscript scripts/revision/08_recompute_reviewer2_cxcr6_limma.R \
 
 The cross-cohort limma contrasts use all genes shared by the two assays for variance moderation, but remain exploratory because platform and cohort are confounded. `TOX` is absent from the GSE224445 targeted panel and is not imputed.
 
+GSE224445 strict CD8 cells required T-lineage and CD8 RNA/ADT evidence without conflicting CD4, B-cell, or myeloid signal; our cohort used the six marker-annotated CD8 clusters. Feature-plot RNA log-normalized expression was scaled per gene within each dataset to the 99th percentile (0-1), so colors represent relative within-dataset intensity.
+
 After downloading the lightweight plotting metrics from Figshare, regenerate primary computational panels without a Seurat object:
 
 ```bash

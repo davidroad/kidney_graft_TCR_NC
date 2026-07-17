@@ -76,6 +76,22 @@ invisible(gc())
 all_df <- rbind(gse_df, primary_df)
 all_df$condition <- factor(all_df$condition, levels = conditions)
 
+relative_expression <- function(values) {
+  if (all(is.na(values))) return(rep(NA_real_, length(values)))
+  cap <- unname(quantile(values[is.finite(values)], 0.99, na.rm = TRUE))
+  if (!is.finite(cap) || cap <= 0) cap <- max(values, na.rm = TRUE)
+  if (!is.finite(cap) || cap <= 0) return(rep(0, length(values)))
+  pmin(pmax(values / cap, 0), 1)
+}
+for (dataset in unique(all_df$dataset)) {
+  rows <- all_df$dataset == dataset
+  for (gene in genes) {
+    all_df[rows, paste0(gene, "_relative")] <- relative_expression(all_df[rows, gene])
+  }
+}
+display_max <- 1
+display_breaks <- c(0, 0.5, 1)
+
 dataset_limits <- lapply(split(all_df, all_df$dataset), function(dat) {
   x_range <- range(dat$umap_1, finite = TRUE)
   y_range <- range(dat$umap_2, finite = TRUE)
@@ -88,22 +104,6 @@ dataset_limits <- lapply(split(all_df, all_df$dataset), function(dat) {
   )
 })
 
-relative_expression <- function(dat, gene) {
-  values <- dat[[gene]]
-  if (all(is.na(values))) return(rep(NA_real_, length(values)))
-  cap <- unname(quantile(values[is.finite(values)], 0.99, na.rm = TRUE))
-  if (!is.finite(cap) || cap <= 0) cap <- max(values, na.rm = TRUE)
-  if (!is.finite(cap) || cap <= 0) return(rep(0, length(values)))
-  pmin(pmax(values / cap, 0), 1)
-}
-
-for (dataset in unique(all_df$dataset)) {
-  rows <- all_df$dataset == dataset
-  for (gene in genes) {
-    all_df[rows, paste0(gene, "_relative")] <- relative_expression(all_df[rows, , drop = FALSE], gene)
-  }
-}
-
 panel_theme <- theme_void(base_family = "DejaVu Sans") +
   theme(
     plot.title = element_text(size = 10.5, face = "bold", hjust = 0.5, margin = margin(b = 2)),
@@ -115,10 +115,10 @@ make_panel <- function(gene, condition, show_title = FALSE) {
   dataset <- if (grepl("^PBMC:(TOT|STA|BPAR)$", condition)) "GSE224445" else "This study"
   dat <- all_df[all_df$condition == condition & all_df$dataset == dataset, , drop = FALSE]
   limits <- dataset_limits[[dataset]]
-  rel_col <- paste0(gene, "_relative")
+  expression_col <- paste0(gene, "_relative")
   title <- if (show_title) unname(condition_titles[[condition]]) else NULL
 
-  if (!nrow(dat) || all(is.na(dat[[rel_col]]))) {
+  if (!nrow(dat) || all(is.na(dat[[expression_col]]))) {
     return(
       ggplot() +
         annotate("text", x = mean(limits$x), y = mean(limits$y), label = if (gene == "TOX" && condition == "PBMC:STA") "Not measured in\nGSE224445 targeted panel" else "", size = 3.0, colour = "#555555") +
@@ -128,16 +128,15 @@ make_panel <- function(gene, condition, show_title = FALSE) {
     )
   }
 
-  dat <- dat[order(dat[[rel_col]], na.last = TRUE), , drop = FALSE]
+  dat <- dat[order(dat[[expression_col]], na.last = TRUE), , drop = FALSE]
   point_size <- 0.60
-  ggplot(dat, aes(x = umap_1, y = umap_2, colour = .data[[rel_col]])) +
+  ggplot(dat, aes(x = umap_1, y = umap_2, colour = .data[[expression_col]])) +
     geom_point(size = point_size, alpha = 0.9, stroke = 0) +
     scale_colour_gradientn(
       colours = c("#D9D9D9", "#F5B39D", "#D7553A", "#7F0000"),
       values = c(0, 0.08, 0.42, 1),
-      limits = c(0, 1),
-      breaks = c(0, 0.5, 1),
-      labels = c("0", "0.5", "1"),
+      limits = c(0, display_max),
+      breaks = display_breaks,
       oob = scales::squish,
       guide = if (gene == "CXCR6" && condition == "Graft:Rejection") guide_colorbar(
         title = "Relative log-normalized expression
@@ -175,7 +174,7 @@ rows <- lapply(seq_along(genes), function(i) {
 figure <- wrap_plots(c(list(header), rows), ncol = 1, heights = c(0.18, rep(1, length(rows))), guides = "collect") +
   plot_annotation(
     title = "CD8+ T-cell marker expression by clinical group",
-    caption = "Color intensity shows Seurat RNA log-normalized expression, scaled for each gene within each dataset to its 99th percentile (0-1).",
+    caption = "RNA log-normalized expression was scaled per gene within each dataset to its 99th percentile (0-1); colors show relative, not absolute cross-platform, intensity.",
     theme = theme(
       plot.title = element_text(family = "DejaVu Sans", face = "bold", size = 14, hjust = 0.5, margin = margin(b = 6)),
       plot.caption = element_text(family = "DejaVu Sans", size = 10, colour = "#444444", hjust = 0.5, margin = margin(t = 8))
