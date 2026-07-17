@@ -129,15 +129,23 @@ make_panel <- function(gene, condition, show_title = FALSE) {
   }
 
   dat <- dat[order(dat[[rel_col]], na.last = TRUE), , drop = FALSE]
-  point_size <- 0.80
+  point_size <- 0.60
   ggplot(dat, aes(x = umap_1, y = umap_2, colour = .data[[rel_col]])) +
     geom_point(size = point_size, alpha = 0.9, stroke = 0) +
     scale_colour_gradientn(
       colours = c("#D9D9D9", "#F5B39D", "#D7553A", "#7F0000"),
       values = c(0, 0.08, 0.42, 1),
       limits = c(0, 1),
+      breaks = c(0, 0.5, 1),
+      labels = c("0", "0.5", "1"),
       oob = scales::squish,
-      guide = "none"
+      guide = if (gene == "CXCR6" && condition == "Graft:Rejection") guide_colorbar(
+        title = "Relative log-normalized expression
+(99th percentile = 1)",
+        title.position = "top",
+        barheight = grid::unit(2.0, "in"),
+        barwidth = grid::unit(0.18, "in")
+      ) else "none"
     ) +
     coord_fixed(xlim = limits$x, ylim = limits$y, expand = FALSE) +
     labs(title = title) +
@@ -161,14 +169,16 @@ rows <- lapply(seq_along(genes), function(i) {
     annotate("text", x = 0.5, y = 0.5, label = gene, fontface = "bold", size = 4.0, family = "DejaVu Sans") +
     theme_void()
   panels <- lapply(conditions, function(condition) make_panel(gene, condition, show_title = i == 1L))
-  wrap_plots(c(list(label_plot), panels), nrow = 1, widths = c(0.34, rep(1, 5)))
+  wrap_plots(c(list(label_plot), panels), nrow = 1, widths = c(0.34, rep(1, 5)), guides = "collect")
 })
 
-figure <- wrap_plots(c(list(header), rows), ncol = 1, heights = c(0.18, rep(1, length(rows)))) +
+figure <- wrap_plots(c(list(header), rows), ncol = 1, heights = c(0.18, rep(1, length(rows))), guides = "collect") +
   plot_annotation(
     title = "CD8+ T-cell marker expression by clinical group",
+    caption = "Color intensity shows Seurat RNA log-normalized expression, scaled for each gene within each dataset to its 99th percentile (0-1).",
     theme = theme(
-      plot.title = element_text(family = "DejaVu Sans", face = "bold", size = 14, hjust = 0.5, margin = margin(b = 6))
+      plot.title = element_text(family = "DejaVu Sans", face = "bold", size = 14, hjust = 0.5, margin = margin(b = 6)),
+      plot.caption = element_text(family = "DejaVu Sans", size = 10, colour = "#444444", hjust = 0.5, margin = margin(t = 8))
     )
   )
 
