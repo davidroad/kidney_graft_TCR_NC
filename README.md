@@ -6,7 +6,7 @@ Repository: https://github.com/davidroad/kidney_graft_TCR_NC
 
 This code package supports the human computational panels present in `Figures 07 30 2026.pdf`. It reconstructs the primary scRNA-seq and TCR-seq analysis route, exports lightweight source data, reproduces selected panels from released metrics, and records the paired cluster-frequency statistics.
 
-The repository is code-only. Figure files and source-data tables are supplied in the linked Figshare package. Reviewer-only analyses and scripts whose outputs are absent from the 07-30 full figure set are not included.
+The repository is code-only. Figure files and source-data tables are supplied in the linked Figshare package.
 
 ## Repository contents
 
@@ -14,7 +14,7 @@ The repository is code-only. Figure files and source-data tables are supplied in
 - `scripts/source_data_export/`: exports primary figure source tables and the Fig. 2I Monocle trajectory.
 - `scripts/reproducibility/`: exports lightweight metrics and plots Fig. 1, Fig. 2, and Supplementary Fig. 13 panels from Figshare data.
 - `scripts/revision/`: final paired Fig. 1G/Fig. 2B statistics and the GSE224445 external PBMC route used in Supplementary Fig. 6A.
-- `provenance/`: panel mapping, analysis notes, session information, and checksums.
+- `provenance/`: analysis notes, session information, and checksums.
 - `DATA_AVAILABILITY.md`: accessions and expected processed inputs.
 
 ## Core analysis definitions
@@ -31,7 +31,7 @@ The primary integration route uses Seurat reciprocal PCA anchors to align the ei
 
 Supplementary Fig. 6A uses GSE224445 and GSE319007 CD8 T cells. Log-normalized CXCR6 expression is divided by the 99th percentile separately within each dataset for UMAP color display and limited to 0-1. The frequency graphs are not percentile-scaled and use detectable CXCR6 transcript expression.
 
-Supplementary Fig. 13A-B uses the 17-gene glycolysis score. Supplementary Fig. 13C contains gene-level paired pseudobulk edgeR results; it is not a HUMESS activity panel.
+Supplementary Fig. 13A-B uses the 17-gene glycolysis score. Supplementary Fig. 13C contains gene-level paired pseudobulk edgeR results.
 
 ## Running the code
 
@@ -72,8 +72,6 @@ Rscript scripts/reproducibility/02_plot_figure2_from_metrics.R \
 Rscript scripts/reproducibility/03_plot_suppfig13_from_metrics.R \
   figshare/inputs/plotting_inputs figshare/tables results/supplementary_figure_13
 ```
-
-The complete panel map is `provenance/figure_panel_reproducibility_index.tsv`.
 
 ## Data access
 
