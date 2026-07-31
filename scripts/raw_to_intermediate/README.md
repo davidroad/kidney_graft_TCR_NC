@@ -23,6 +23,6 @@ The manifest is a local input configuration and must remain outside version cont
 - `merged_4_with_vdj_T_cells_10_8_2025.RData`: extracted T-cell object.
 - `merged_4_with_vdj_T_cells_filter_10_28_2025.RData`: filtered/annotated T-cell object.
 - `all_clone_filter_10_28.Rdata`: shared graft/PBMC clonotype subset.
-- `merged_4_with_vdj_CD8_T_cells_filter_10_28_2025.RData`: CD8 subset used for revision metabolic analysis.
+- `merged_4_with_vdj_CD8_T_cells_filter_10_28_2025.RData`: CD8 subset used for downstream analysis.
 
 The date-stamped filenames match the analysis workflow. These large objects are not part of the default Figshare source-data deposit.
