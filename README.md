@@ -4,7 +4,7 @@ Finalized for Nature Communications: 2026-07-30
 
 Repository: https://github.com/davidroad/kidney_graft_TCR_NC
 
-This code package supports the human computational panels present in `Figures 07 30 2026.pdf`. It reconstructs the primary scRNA-seq and TCR-seq analysis route, exports lightweight source data, reproduces selected panels from released metrics, and records the paired cluster-frequency statistics.
+This code package reconstructs the primary scRNA-seq and TCR-seq analysis route, exports lightweight source data, reproduces selected panels from released metrics, and records the paired cluster-frequency statistics.
 
 The repository is code-only. Figure files and source-data tables are supplied in the linked Figshare package.
 
@@ -78,4 +78,4 @@ Rscript scripts/reproducibility/03_plot_suppfig13_from_metrics.R \
 - GSE319007: matched scRNA-seq and TCR-seq.
 - GSE319298: CUT&Tag.
 - GSE224445: external PBMC scRNA-seq.
-- Figshare source-data record: https://doi.org/10.6084/m9.figshare.33001412
+- Figshare source-data record: https://doi.org/10.6084/m9.figshare.33001412.v11
