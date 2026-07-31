@@ -15,6 +15,12 @@ dependencies:
   - r-patchwork
   - r-cowplot
   - r-ggrepel
+  - r-matrix
+  - r-data.table
+  - r-pheatmap
+  - r-remotes
+  - r-monocle3
+  - bioconductor-edger
   - python
   - pymupdf
   - pandas

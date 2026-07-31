@@ -16,26 +16,46 @@ dir.create(out, recursive = TRUE, showWarnings = FALSE)
 
 d <- read.csv(input, check.names = FALSE)
 feature_col <- "integrated_snn_res.0.5"
-required <- c("patient", "condition", feature_col, "proportion_pct")
+required <- c("patient", "condition", feature_col, "n", "denom", "proportion_pct")
 if (!all(required %in% names(d))) stop("Fig. 1G source table is missing required columns.")
 
 condition_key <- tolower(trimws(as.character(d$condition)))
 d$condition <- ifelse(condition_key == "pbmc", "PBMC",
   ifelse(condition_key == "graft", "Graft", NA_character_))
 if (anyNA(d$condition)) stop("Unexpected condition labels in Fig. 1G source table.")
+d[[feature_col]] <- as.character(d[[feature_col]])
+d$n <- as.numeric(d$n)
+d$denom <- as.numeric(d$denom)
+if (anyNA(d$n) || anyNA(d$denom) || any(d$n < 0) || any(d$denom <= 0) ||
+    any(d$n > d$denom)) {
+  stop("Fig. 1G n and denom columns must contain valid non-negative cell counts.")
+}
 
 patients <- sort(unique(as.character(d$patient)))
 features <- sort(unique(as.character(d[[feature_col]])), method = "radix")
+sample_denom <- unique(d[c("patient", "condition", "denom")])
+sample_denom$key <- paste(sample_denom$patient, sample_denom$condition, sep = "__")
+if (anyDuplicated(sample_denom$key)) {
+  stop("More than one denominator was found for at least one Fig. 1G sample.")
+}
+denom_lookup <- setNames(sample_denom$denom, sample_denom$key)
+
 grid <- expand.grid(patient = patients, condition = c("PBMC", "Graft"),
   feature = features, stringsAsFactors = FALSE)
 names(grid)[3] <- feature_col
 d <- merge(grid, d, by = c("patient", "condition", feature_col), all.x = TRUE)
-d$proportion_pct[is.na(d$proportion_pct)] <- 0
+missing_n <- is.na(d$n)
+d$n[missing_n] <- 0
+d$denom[missing_n] <- unname(denom_lookup[
+  paste(d$patient[missing_n], d$condition[missing_n], sep = "__")
+])
+if (anyNA(d$denom)) stop("A Fig. 1G sample denominator could not be restored.")
+d$proportion_pct <- 100 * d$n / d$denom
 d$patient <- factor(d$patient, levels = patients)
 d$condition <- factor(d$condition, levels = c("PBMC", "Graft"))
 d$feature <- as.character(d[[feature_col]])
 d$sample <- paste(d$patient, d$condition, sep = "__")
-d$y <- qlogis(pmin(pmax(d$proportion_pct / 100, 0.005), 0.995))
+d$y <- log((d$n + 0.5) / (d$denom - d$n + 0.5))
 
 sample_meta <- unique(d[c("patient", "condition", "sample")])
 sample_meta <- sample_meta[order(sample_meta$patient, sample_meta$condition), ]
@@ -60,7 +80,8 @@ stats <- data.frame(
   p_value = tt$P.Value,
   FDR = tt$adj.P.Val,
   model = paste("limma lmFit + eBayes(trend=TRUE, robust=FALSE);",
-    "one 28-cluster matrix; design ~ patient + condition; bounded logit proportion"),
+    "one 28-cluster matrix; design ~ patient + condition;",
+    "count-based empirical logit with 0.5 pseudocount"),
   row.names = NULL
 )
 write.csv(stats, file.path(out, "fig1g_limma_ebayes_logit_proportions.csv"), row.names = FALSE)
@@ -68,7 +89,10 @@ writeLines(c(
   "Unit of inference: four matched patients (P1-P4).",
   "Model: one 28 x 8 cluster-by-sample matrix fitted with limma lmFit/eBayes.",
   "Design: ~ patient + condition; contrast: Graft versus PBMC.",
-  "Transformation: logit of sample-level proportions bounded at 0.005/0.995.",
+  paste(
+    "Transformation: count-based empirical logit",
+    "log((cluster count + 0.5)/(total count - cluster count + 0.5))."
+  ),
   "Multiplicity: Benjamini-Hochberg across 28 clusters."
 ), file.path(out, "fig1g_provenance.txt"))
 writeLines(capture.output(sessionInfo()), file.path(out, "fig1g_sessionInfo.txt"))

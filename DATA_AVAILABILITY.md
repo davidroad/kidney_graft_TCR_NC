@@ -1,27 +1,18 @@
 # Data availability
 
-Raw scRNA-seq and TCR-seq data are associated with GEO accession `GSE319007`. CUT&Tag data are associated with `GSE319298`. The external PBMC analysis uses `GSE224445`.
+Raw scRNA-seq and TCR-seq data are available under `GSE319007`. CUT&Tag data are available under `GSE319298`. The external PBMC analysis uses `GSE224445`.
 
-Large processed Seurat objects and HUMESS model outputs are not committed to GitHub. Reproducibility materials are available in the [Figshare record](https://doi.org/10.6084/m9.figshare.33001412). Stage the required processed inputs in the following layout:
+Large processed objects are not committed to the code repository. The main scripts expect reconstructed objects such as:
 
 ```text
 data/processed/
+  merged_4_with_vdj_8_24_2025.RData
   merged_4_with_vdj_T_cells_filter_10_28_2025.RData
   all_clone_filter_10_28.Rdata
-
-results/reviewer2_metabolic_profile/
-  input/cd8_metabolic_scores.tsv.gz
-  input/pseudobulk_logcpm_by_sample.tsv.gz
-  input/pseudobulk_counts_by_sample.tsv.gz
-  edgeR/paired_graft_vs_pbmc_edgeR.tsv
-  humess/humess_run/comparisons/PBMC__vs__Graft/ReporterMetabolites/
-    reporter_metabolites_Graft_vs_PBMC_all.tsv
-  humess/humess_run/models/
+  merged_4_with_vdj_CD8_T_cells_filter_10_28_2025.RData
+  GSE224445_strict_cd8_seurat.rds
 ```
 
-Expected RData object names:
+Lightweight plotting metrics, statistical tables, and the unchanged 07-30 full figure set are supplied through Figshare:
 
-- `merged_4_with_vdj_T_cells_filter_10_28_2025.RData`: `merged_all_T_batchcorrected_filter`
-- `all_clone_filter_10_28.Rdata`: `all_clone_test_filter`
-
-Figshare DOI: [`10.6084/m9.figshare.33001412`](https://doi.org/10.6084/m9.figshare.33001412). The final Nature Communications citation should be added after journal publication.
+https://doi.org/10.6084/m9.figshare.33001412
