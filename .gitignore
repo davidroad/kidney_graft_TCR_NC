@@ -15,3 +15,7 @@ figures/
 *.rds
 __pycache__/
 *.pyc
+
+# Manuscript drafts and assembled figure sets
+Figures *.pdf
+*.docx

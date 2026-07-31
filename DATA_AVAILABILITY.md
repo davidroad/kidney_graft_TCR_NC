@@ -13,6 +13,6 @@ data/processed/
   GSE224445_strict_cd8_seurat.rds
 ```
 
-Lightweight plotting metrics, statistical tables, and the unchanged 07-30 full figure set are supplied through Figshare:
+Lightweight plotting metrics and statistical tables are supplied through Figshare:
 
-https://doi.org/10.6084/m9.figshare.33001412
+https://doi.org/10.6084/m9.figshare.33001412.v11
