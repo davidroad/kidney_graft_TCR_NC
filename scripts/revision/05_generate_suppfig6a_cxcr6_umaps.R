@@ -70,10 +70,10 @@ extract_plot_data <- function(object, reduction, group, dataset) {
 }
 
 primary <- load_single_seurat(primary_file)
-primary_group <- if ("group" %in% colnames(primary.data)) as.character(primary$group) else rep(NA_character_, ncol(primary))
+primary_group <- if ("group" %in% colnames(primary@meta.data)) as.character(primary$group) else rep(NA_character_, ncol(primary))
 primary_tissue <- rep(NA_character_, ncol(primary))
 for (field in c("tissue", "label", "condition")) {
-  if (field %in% colnames(primary.data)) {
+  if (field %in% colnames(primary@meta.data)) {
     values <- as.character(primary[[field, drop = TRUE]])
     primary_tissue[is.na(primary_tissue) & grepl("PBMC", values, ignore.case = TRUE)] <- "PBMC"
     primary_tissue[is.na(primary_tissue) & grepl("Graft|Kidney", values, ignore.case = TRUE)] <- "Graft"
