@@ -25,4 +25,4 @@ The manifest is a local input configuration and must remain outside version cont
 - `all_clone_filter_10_28.Rdata`: shared graft/PBMC clonotype subset.
 - `merged_4_with_vdj_CD8_T_cells_filter_10_28_2025.RData`: CD8 subset used for revision metabolic analysis.
 
-The date-stamped filenames match the analysis provenance. These large objects are not part of the default figshare source-data deposit.
+The date-stamped filenames match the analysis workflow. These large objects are not part of the default Figshare source-data deposit.

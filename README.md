@@ -1,6 +1,6 @@
 # Kidney Graft TCR Analysis
 
-Finalized for Nature Communications: 2026-07-30
+Finalized for Nature Communications: 2026-07-31
 
 Repository: https://github.com/davidroad/kidney_graft_TCR_NC
 
@@ -14,8 +14,8 @@ The repository is code-only. Figure files and source-data tables are supplied in
 - `scripts/source_data_export/`: exports primary figure source tables and the Fig. 2I Monocle trajectory.
 - `scripts/reproducibility/`: exports lightweight metrics and plots Fig. 1, Fig. 2, and Supplementary Fig. 13 panels from Figshare data.
 - `scripts/revision/`: final paired Fig. 1G/Fig. 2B statistics and the GSE224445 external PBMC route used in Supplementary Fig. 6A.
-- `provenance/`: analysis notes, session information, and checksums.
 - `DATA_AVAILABILITY.md`: accessions and expected processed inputs.
+- `SHA256SUMS.txt`: SHA-256 checksums for file-integrity verification.
 
 ## Core analysis definitions
 
@@ -35,9 +35,9 @@ Supplementary Fig. 13A-B uses the 17-gene glycolysis score. Supplementary Fig. 1
 
 ## Reproduce in article order
 
-Download and extract the Figshare source-data package (version 1) next to this repository as `figshare/`:
+Download and extract the Figshare source-data package (version 2) next to this repository as `figshare/`:
 
-https://doi.org/10.6084/m9.figshare.33131777.v1
+https://doi.org/10.6084/m9.figshare.33131777.v2
 
 The public repository is code-only. It does not contain manuscript drafts, assembled figure files, RData, or RDS objects.
 
@@ -102,4 +102,4 @@ Rscript scripts/reproducibility/03_plot_suppfig13_from_metrics.R \
 - GSE319007: matched scRNA-seq and TCR-seq.
 - GSE319298: CUT&Tag.
 - GSE224445: external PBMC scRNA-seq.
-- Figshare source-data record: https://doi.org/10.6084/m9.figshare.33131777.v1
+- Figshare source-data record: https://doi.org/10.6084/m9.figshare.33131777.v2

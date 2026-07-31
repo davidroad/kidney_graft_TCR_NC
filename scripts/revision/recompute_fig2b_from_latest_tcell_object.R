@@ -165,22 +165,4 @@ stats <- data.frame(
   stringsAsFactors = FALSE
 )
 write.csv(stats, file.path(out, "fig2b_limma_ebayes_logit_proportions.csv"), row.names = FALSE)
-
-writeLines(
-  c(
-    paste("Source:", source_label),
-    paste("Object:", object_label),
-    "Unit of inference: four matched patients (P1-P4).",
-    "Features: 11 annotated T-cell clusters used in Fig. 2B.",
-    "Model: one 11 x 8 cluster-by-sample matrix fitted with limma lmFit/eBayes.",
-    "Design: ~ patient + condition; contrast: Graft versus PBMC.",
-    paste(
-      "Transformation: count-based empirical logit",
-      "log((cluster count + 0.5)/(total count - cluster count + 0.5))."
-    ),
-    "Multiplicity: Benjamini-Hochberg across 11 clusters."
-  ),
-  file.path(out, "fig2b_provenance.txt")
-)
-writeLines(capture.output(sessionInfo()), file.path(out, "fig2b_sessionInfo.txt"))
 message("Wrote corrected 11-cluster Fig. 2B source and limma/eBayes tables to ", out)
