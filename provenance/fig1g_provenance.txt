@@ -1,5 +1,0 @@
-Unit of inference: four matched patients (P1-P4).
-Model: one 28 x 8 cluster-by-sample matrix fitted with limma lmFit/eBayes.
-Design: ~ patient + condition; contrast: Graft versus PBMC.
-Transformation: count-based empirical logit log((cluster count + 0.5)/(total count - cluster count + 0.5)).
-Multiplicity: Benjamini-Hochberg across 28 clusters.

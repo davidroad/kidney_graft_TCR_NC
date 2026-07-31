@@ -85,15 +85,4 @@ stats <- data.frame(
   row.names = NULL
 )
 write.csv(stats, file.path(out, "fig1g_limma_ebayes_logit_proportions.csv"), row.names = FALSE)
-writeLines(c(
-  "Unit of inference: four matched patients (P1-P4).",
-  "Model: one 28 x 8 cluster-by-sample matrix fitted with limma lmFit/eBayes.",
-  "Design: ~ patient + condition; contrast: Graft versus PBMC.",
-  paste(
-    "Transformation: count-based empirical logit",
-    "log((cluster count + 0.5)/(total count - cluster count + 0.5))."
-  ),
-  "Multiplicity: Benjamini-Hochberg across 28 clusters."
-), file.path(out, "fig1g_provenance.txt"))
-writeLines(capture.output(sessionInfo()), file.path(out, "fig1g_sessionInfo.txt"))
 message("Wrote corrected Fig. 1G limma/eBayes table to ", out)
