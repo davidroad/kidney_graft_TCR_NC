@@ -35,9 +35,9 @@ Supplementary Fig. 13A-B uses the 17-gene glycolysis score. Supplementary Fig. 1
 
 ## Reproduce in article order
 
-Download and extract the Figshare v12 source-data package next to this repository as `figshare/`:
+Download and extract the Figshare source-data package (version 1) next to this repository as `figshare/`:
 
-https://doi.org/10.6084/m9.figshare.33001412.v12
+https://doi.org/10.6084/m9.figshare.33131777.v1
 
 The public repository is code-only. It does not contain manuscript drafts, assembled figure files, RData, or RDS objects.
 
@@ -102,4 +102,4 @@ Rscript scripts/reproducibility/03_plot_suppfig13_from_metrics.R \
 - GSE319007: matched scRNA-seq and TCR-seq.
 - GSE319298: CUT&Tag.
 - GSE224445: external PBMC scRNA-seq.
-- Figshare source-data record: https://doi.org/10.6084/m9.figshare.33001412.v12
+- Figshare source-data record: https://doi.org/10.6084/m9.figshare.33131777.v1
