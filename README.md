@@ -34,65 +34,16 @@ Figure source data and standalone panel outputs are provided in the linked Figsh
 - **Shared-clonotype trajectory:** `scripts/source_data_export/03_generate_shared_clone_monocle_trajectory.R` generates the Fig. 2I Monocle trajectory.
 - **Panel reconstruction from released data:** `scripts/reproducibility/` redraws the supported panels using the lightweight Figshare metrics.
 
-## Reproduce in article order
+## Required inputs
 
-Download and extract the Figshare source-data package (version 3) next to this repository as `figshare/`:
+- **Fig. 1:** the Figshare Fig. 1 plotting metrics; Fig. 1G additionally uses the released sample-level cluster table.
+- **Fig. 2A-H:** the Figshare Fig. 2 plotting metrics; Fig. 2B additionally uses the released sample-level T-cell cluster table.
+- **Fig. 2I:** the processed shared-clonotype object `all_clone_filter_10_28.Rdata`.
+- **Supplementary Fig. 6A:** the processed GSE319007 CD8 object and the processed GSE224445 CD8 object.
+- **Supplementary Fig. 13A-C:** the released glycolysis-score metrics, paired sample values, and gene-level result table from Figshare.
+- **Upstream object construction:** staged GSE319007 single-cell matrices, matching TCR files, and a sample manifest are used by `scripts/raw_to_intermediate/`; downloaded GSE224445 files are used by `scripts/analysis/03_process_external_pbmc_dataset.R`.
 
-https://doi.org/10.6084/m9.figshare.33131777.v3
-
-### Software environment
-
-Create the software environment:
-
-```bash
-conda env create -f environment.yml
-conda activate kidney-graft-tcr-nc
-Rscript -e 'remotes::install_github("chris-mcginnis-ucsf/DoubletFinder")'
-```
-
-### Fig. 1
-
-```bash
-Rscript scripts/reproducibility/01_plot_figure1_from_metrics.R \
-  figshare/inputs/plotting_inputs results/figure_1
-Rscript scripts/analysis/recompute_fig1g_limma.R \
-  --input figshare/tables/figure_1/fig1g_current_cluster_proportions_by_patient.csv \
-  --out results/fig1g
-```
-
-### Fig. 2
-
-```bash
-Rscript scripts/reproducibility/02_plot_figure2_from_metrics.R \
-  figshare/inputs/plotting_inputs results/figure_2
-Rscript scripts/analysis/recompute_fig2b_from_latest_tcell_object.R \
-  --table-input figshare/tables/figure_2/fig2b_latest_11cluster_sample_level_proportions.csv \
-  --out results/fig2b
-```
-
-Fig. 2I uses the shared-clonotype intermediate object and the documented Monocle 3 workflow:
-
-```bash
-Rscript scripts/source_data_export/03_generate_shared_clone_monocle_trajectory.R \
-  data/processed/all_clone_filter_10_28.Rdata results/figure_2i
-```
-
-### Supplementary Fig. 6A
-
-Generate the CXCR6 UMAP portion after reconstructing or supplying the two processed CD8 objects:
-
-```bash
-Rscript scripts/analysis/05_generate_suppfig6a_cxcr6_umaps.R \
-  data/processed/merged_4_with_vdj_CD8_T_cells_filter_10_28_2025.RData \
-  data/processed/GSE224445_strict_cd8_seurat.rds results/suppfig6a
-```
-
-### Supplementary Fig. 13A-C
-
-```bash
-Rscript scripts/reproducibility/03_plot_suppfig13_from_metrics.R \
-  figshare/inputs/plotting_inputs figshare/tables results/supplementary_figure_13
-```
+Software dependencies are listed in `environment.yml`. The released metrics and tables are available at https://doi.org/10.6084/m9.figshare.33131777.v3.
 
 ## Data access
 
