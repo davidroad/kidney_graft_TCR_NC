@@ -33,7 +33,15 @@ Supplementary Fig. 6A uses GSE224445 and GSE319007 CD8 T cells. Log-normalized C
 
 Supplementary Fig. 13A-B uses the 17-gene glycolysis score. Supplementary Fig. 13C contains gene-level paired pseudobulk edgeR results.
 
-## Running the code
+## Reproduce in article order
+
+Download and extract the Figshare v12 source-data package next to this repository as `figshare/`:
+
+https://doi.org/10.6084/m9.figshare.33001412.v12
+
+The public repository is code-only. It does not contain manuscript drafts, assembled figure files, RData, or RDS objects.
+
+### Software environment
 
 Create the software environment:
 
@@ -43,18 +51,38 @@ conda activate kidney-graft-tcr-nc
 Rscript -e 'remotes::install_github("chris-mcginnis-ucsf/DoubletFinder")'
 ```
 
-Recompute final Fig. 1G and Fig. 2B statistical tables:
+### Fig. 1
 
 ```bash
+Rscript scripts/reproducibility/01_plot_figure1_from_metrics.R \
+  figshare/inputs/plotting_inputs results/figure_1
 Rscript scripts/revision/recompute_fig1g_limma.R \
   --input figshare/tables/figure_1/fig1g_current_cluster_proportions_by_patient.csv \
   --out results/fig1g
+```
+
+### Fig. 2
+
+```bash
+Rscript scripts/reproducibility/02_plot_figure2_from_metrics.R \
+  figshare/inputs/plotting_inputs results/figure_2
 Rscript scripts/revision/recompute_fig2b_from_latest_tcell_object.R \
   --table-input figshare/tables/figure_2/fig2b_latest_11cluster_sample_level_proportions.csv \
   --out results/fig2b
 ```
 
-Generate only the CXCR6 UMAP portion of Supplementary Fig. 6A after reconstructing the two CD8 objects:
+Fig. 2I uses the shared-clonotype intermediate object and the documented Monocle 3 workflow:
+
+```bash
+Rscript scripts/source_data_export/03_generate_shared_clone_monocle_trajectory.R \
+  data/processed/all_clone_filter_10_28.Rdata results/figure_2i
+```
+
+The original trajectory root was selected from the TCF7-defined stem-like state through the Monocle 3 `order_cells()` interface.
+
+### Supplementary Fig. 6A
+
+Generate the CXCR6 UMAP portion after reconstructing or supplying the two processed CD8 objects:
 
 ```bash
 Rscript scripts/revision/05_generate_suppfig6a_cxcr6_umaps.R \
@@ -62,13 +90,9 @@ Rscript scripts/revision/05_generate_suppfig6a_cxcr6_umaps.R \
   data/processed/GSE224445_strict_cd8_seurat.rds results/suppfig6a
 ```
 
-After downloading the Figshare plotting inputs:
+### Supplementary Fig. 13A-C
 
 ```bash
-Rscript scripts/reproducibility/01_plot_figure1_from_metrics.R \
-  figshare/inputs/plotting_inputs results/figure_1
-Rscript scripts/reproducibility/02_plot_figure2_from_metrics.R \
-  figshare/inputs/plotting_inputs results/figure_2
 Rscript scripts/reproducibility/03_plot_suppfig13_from_metrics.R \
   figshare/inputs/plotting_inputs figshare/tables results/supplementary_figure_13
 ```
@@ -78,4 +102,4 @@ Rscript scripts/reproducibility/03_plot_suppfig13_from_metrics.R \
 - GSE319007: matched scRNA-seq and TCR-seq.
 - GSE319298: CUT&Tag.
 - GSE224445: external PBMC scRNA-seq.
-- Figshare source-data record: https://doi.org/10.6084/m9.figshare.33001412.v11
+- Figshare source-data record: https://doi.org/10.6084/m9.figshare.33001412.v12
