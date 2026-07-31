@@ -87,7 +87,7 @@ merge8_marker_sets <- list(
 )
 
 clusters <- levels(obj$highres_cluster)
-cluster_audit <- bind_rows(lapply(clusters, function(cl) {
+cluster_summary <- bind_rows(lapply(clusters, function(cl) {
   cells <- colnames(obj)[obj$highres_cluster == cl]
   out <- data.frame(
     highres_cluster = cl,
@@ -119,7 +119,7 @@ cluster_audit <- bind_rows(lapply(clusters, function(cl) {
   out
 }))
 
-cluster_audit <- cluster_audit %>%
+cluster_summary <- cluster_summary %>%
   mutate(
     candidate_cd8_cluster = score_t_lineage > 2 &
       score_cd8_core > 0.5 &
@@ -150,8 +150,8 @@ cluster_audit <- cluster_audit %>%
   )
 
 write_csv(
-  cluster_audit,
-  file.path(table_dir, "GSE224445_highres1_cluster_annotation_audit_merge8_markers.csv")
+  cluster_summary,
+  file.path(table_dir, "GSE224445_highres1_cluster_annotation_summary_merge8_markers.csv")
 )
 
 cd8a_count <- safe_feature_vec(rna_counts, "CD8A")
@@ -169,7 +169,7 @@ adt_cd8 <- if (!is.null(adt_data) && "CD8:RPA-T8" %in% rownames(adt_data)) as.nu
 adt_cd4 <- if (!is.null(adt_data) && "CD4:SK3" %in% rownames(adt_data)) as.numeric(adt_data["CD4:SK3", ]) else rep(0, ncol(obj))
 adt_cd3 <- if (!is.null(adt_data) && "CD3:SK7" %in% rownames(adt_data)) as.numeric(adt_data["CD3:SK7", ]) else rep(0, ncol(obj))
 
-cd8_clusters <- cluster_audit$highres_cluster[cluster_audit$keep_for_strict_cd8]
+cd8_clusters <- cluster_summary$highres_cluster[cluster_summary$keep_for_strict_cd8]
 cell_cluster_is_cd8 <- as.character(obj$highres_cluster) %in% cd8_clusters
 cell_t_evidence <- trac_count > 0 | cd3d_count > 0 | adt_cd3 > 0.5
 cell_cd8_evidence <- cd8a_count > 0 | cd8b_count > 0 | adt_cd8 > 0.5
@@ -185,7 +185,7 @@ obj$CD8A_count_positive <- cd8a_count > 0
 obj$CD8B_count_positive <- cd8b_count > 0
 obj$CD8A_or_CD8B_count_positive <- cd8a_count > 0 | cd8b_count > 0
 obj$TRAC_or_CD3D_count_positive <- trac_count > 0 | cd3d_count > 0
-obj$article_annotation_highres <- cluster_audit$article_annotation_highres[match(as.character(obj$highres_cluster), cluster_audit$highres_cluster)]
+obj$article_annotation_highres <- cluster_summary$article_annotation_highres[match(as.character(obj$highres_cluster), cluster_summary$highres_cluster)]
 
 strict_summary <- obj@meta.data %>%
   mutate(
