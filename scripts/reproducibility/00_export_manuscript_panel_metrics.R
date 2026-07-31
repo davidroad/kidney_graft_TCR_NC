@@ -84,13 +84,23 @@ export_embedding <- function(object, prefix, include_expression = character()) {
 
 export_proportions <- function(embedding, prefix) {
   keep <- !is.na(embedding$sample) & !is.na(embedding$cluster)
-  counts <- aggregate(
-    list(n_cells = rep(1L, sum(keep))),
-    embedding[keep, c("patient", "sample", "tissue", "cluster", "cluster_id"), drop = FALSE],
-    sum
-  )
+  keys <- embedding[keep, c("patient", "sample", "tissue", "cluster", "cluster_id"), drop = FALSE]
+  counts <- aggregate(list(n_cells = rep(1L, nrow(keys))), keys, sum)
   totals <- aggregate(n_cells ~ sample, counts, sum)
   names(totals)[2] <- "sample_total_cells"
+
+  sample_map <- unique(keys[c("patient", "sample", "tissue")])
+  cluster_map <- unique(keys[c("cluster", "cluster_id")])
+  if (anyDuplicated(cluster_map$cluster_id)) {
+    stop("A cluster ID maps to more than one annotation in ", prefix)
+  }
+  complete_grid <- merge(sample_map, cluster_map, by = NULL, sort = FALSE)
+  counts <- merge(
+    complete_grid, counts,
+    by = c("patient", "sample", "tissue", "cluster", "cluster_id"),
+    all.x = TRUE, sort = FALSE
+  )
+  counts$n_cells[is.na(counts$n_cells)] <- 0L
   counts <- merge(counts, totals, by = "sample", all.x = TRUE, sort = FALSE)
   counts$proportion <- counts$n_cells / counts$sample_total_cells
   write_csv(counts, paste0(prefix, "_sample_cluster_proportions.csv"))
