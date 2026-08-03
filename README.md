@@ -1,12 +1,8 @@
 # Kidney Graft TCR Analysis
 
-Finalized for Nature Communications: 2026-08-03
-
-Repository: https://github.com/davidroad/kidney_graft_TCR_NC
-
 This repository contains the analysis code for the human scRNA-seq and TCR-seq results. The scripts build processed objects, export source data, run panel-level analyses, and reproduce figures from released metrics.
 
-Figure source data and standalone panel outputs are provided in the linked Figshare package.
+Figure source data and standalone panel outputs are provided in the [Figshare source-data package](https://doi.org/10.6084/m9.figshare.33148562.v4).
 
 ## Repository contents
 
@@ -47,11 +43,10 @@ Figure source data and standalone panel outputs are provided in the linked Figsh
 - Fig. 2C uses the eight `filtered_contig_annotations.csv` files from the matched PBMC and graft V(D)J libraries. Copy and edit `scripts/reproducibility/fig2c_filtered_contig_manifest_template.csv` before running the scRepertoire script.
 - Raw GSE319007 single-cell and TCR inputs enter through `scripts/raw_to_intermediate/`; GSE224445 inputs enter through the external PBMC scripts in `scripts/analysis/`.
 
-Software dependencies are listed in `environment.yml`. Install `scRepertoire` from the matching Bioconductor release if it is not already present. The released figures, metrics, and tables are available at https://doi.org/10.6084/m9.figshare.33148562.
+Software dependencies are listed in `environment.yml`. Install `scRepertoire` from the matching Bioconductor release if it is not already present.
 
 ## Data access
 
 - GSE319007: matched scRNA-seq and TCR-seq.
 - GSE319298: CUT&Tag.
 - GSE224445: external PBMC scRNA-seq.
-- Figshare source-data record: https://doi.org/10.6084/m9.figshare.33148562
