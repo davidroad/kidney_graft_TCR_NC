@@ -2,7 +2,7 @@
 
 This repository contains the analysis code for the human scRNA-seq and TCR-seq results. The scripts build processed objects, export source data, run panel-level analyses, and reproduce figures from released metrics.
 
-Figure source data and standalone panel outputs are provided in the [Figshare source-data package](https://doi.org/10.6084/m9.figshare.33148562.v4).
+Figure source data and standalone panel outputs are provided in the [Figshare source-data package](https://doi.org/10.6084/m9.figshare.33148562.v5).
 
 ## Repository contents
 
