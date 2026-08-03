@@ -19,6 +19,7 @@ dependencies:
   - r-data.table
   - r-pheatmap
   - r-remotes
+  - r-biocmanager
   - r-monocle3
   - bioconductor-edger
   - python

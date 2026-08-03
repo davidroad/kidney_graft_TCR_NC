@@ -149,32 +149,13 @@ if (!is.null(tcell_object)) {
   rm(tcell_embedding); gc()
 }
 
-shared_genes <- c("TCF7", "CXCR6", "GZMB", "IFNG", "PRF1", "TOX", "PDCD1", "HAVCR2", "KLF2", "CISH", "JUN", "MKI67", "CDKN2A")
+shared_genes <- c("TCF7", "KLF2", "SELL", "TOX", "PDCD1", "HAVCR2", "PRF1", "IFNG", "GZMB", "CXCR6", "CISH", "JUN", "MKI67", "CDKN2A")
 shared_object <- load_seurat(shared_path, c("all_clone_test_filter"))
 if (!is.null(shared_object)) {
   shared_embedding <- export_embedding(shared_object, "shared", shared_genes)
   write_csv(shared_embedding, "fig2_shared_clone_umap_expression.csv.gz")
 
   meta <- shared_object@meta.data
-  context <- anonymize_context(meta)
-  clone_col <- c("CTaa", "t_cdr3s_aa")[c("CTaa", "t_cdr3s_aa") %in% colnames(meta)][1]
-  if (!is.na(clone_col)) {
-    clone <- data.frame(
-      patient = context$patient,
-      sample = context$sample,
-      tissue = context$tissue,
-      clonotype = as.character(meta[[clone_col]]),
-      stringsAsFactors = FALSE
-    )
-    clone <- clone[!is.na(clone$clonotype) & nzchar(clone$clonotype), , drop = FALSE]
-    abundance <- aggregate(list(n_cells = rep(1L, nrow(clone))), clone, sum)
-    totals <- aggregate(n_cells ~ sample, abundance, sum)
-    names(totals)[2] <- "sample_total_shared_clone_cells"
-    abundance <- merge(abundance, totals, by = "sample", all.x = TRUE, sort = FALSE)
-    abundance$relative_frequency <- abundance$n_cells / abundance$sample_total_shared_clone_cells
-    write_csv(abundance, "fig2c_shared_clonotype_abundance.csv")
-  }
-
   Idents(shared_object) <- factor(first_column(meta, c("label", "group")), levels = c("PBMC", "Graft"))
   if (all(c("PBMC", "Graft") %in% levels(Idents(shared_object)))) {
     de <- FindMarkers(shared_object, ident.1 = "Graft", ident.2 = "PBMC", min.pct = 0.25, logfc.threshold = 0)

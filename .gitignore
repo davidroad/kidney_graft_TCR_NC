@@ -7,6 +7,7 @@ results/
 tables/
 figures/
 *.csv
+!scripts/reproducibility/fig2c_filtered_contig_manifest_template.csv
 *.tsv
 *.xls
 *.xlsx

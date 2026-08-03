@@ -1,6 +1,6 @@
 # Kidney Graft TCR Analysis
 
-Finalized for Nature Communications: 2026-07-31
+Finalized for Nature Communications: 2026-08-03
 
 Repository: https://github.com/davidroad/kidney_graft_TCR_NC
 
@@ -12,7 +12,7 @@ Figure source data and standalone panel outputs are provided in the linked Figsh
 
 - `scripts/raw_to_intermediate/`: loads the scRNA-seq and TCR-seq inputs and builds the integrated all-CD45, T-cell, shared-clonotype, and CD8 objects.
 - `scripts/source_data_export/`: exports primary figure source tables and the Fig. 2I Monocle trajectory.
-- `scripts/reproducibility/`: exports lightweight metrics and plots Fig. 1, Fig. 2, and Supplementary Fig. 13 panels from Figshare data.
+- `scripts/reproducibility/`: exports lightweight metrics; plots Fig. 1, Fig. 2, and Supplementary Fig. 13 panels; and generates the Fig. 2C scRepertoire alluvial panels.
 - `scripts/analysis/`: runs the Fig. 1G/Fig. 2B statistics and the GSE224445 PBMC analysis used in Supplementary Fig. 6A.
 - `DATA_AVAILABILITY.md`: accessions and expected processed inputs.
 - `SHA256SUMS.txt`: SHA-256 checksums for file-integrity verification.
@@ -22,7 +22,10 @@ Figure source data and standalone panel outputs are provided in the linked Figsh
 | Figure | Main analysis | Script location |
 |---|---|---|
 | Fig. 1 | All-CD45 atlas, sample and tissue distributions, marker summaries, and cluster proportions | `scripts/source_data_export/02_export_all_cd45_main_figure_source_tables.R`; `scripts/reproducibility/01_plot_figure1_from_metrics.R`; `scripts/analysis/recompute_fig1g_limma.R` |
-| Fig. 2 | T-cell atlas, shared graft-PBMC clonotypes, expression patterns, differential expression, and trajectory analysis | `scripts/source_data_export/01_export_tcell_main_figure_source_tables.R`; `scripts/source_data_export/03_generate_shared_clone_monocle_trajectory.R`; `scripts/reproducibility/02_plot_figure2_from_metrics.R`; `scripts/analysis/recompute_fig2b_from_latest_tcell_object.R` |
+| Fig. 2 | T-cell atlas, paired graft-PBMC clonotype alluvial plots, shared-clonotype expression, differential expression, and trajectory analysis | `scripts/source_data_export/01_export_tcell_main_figure_source_tables.R`; `scripts/source_data_export/03_generate_shared_clone_monocle_trajectory.R`; `scripts/reproducibility/02_plot_figure2_from_metrics.R`; `scripts/reproducibility/02b_generate_fig2c_screpertoire_alluvial.R`; `scripts/analysis/recompute_fig2b_from_latest_tcell_object.R` |
+| Supplementary Fig. 1-2 | Per-sample all-CD45 and T-cell UMAP projections and cluster marker summaries | `scripts/raw_to_intermediate/01_build_primary_all_cell_object.R`; `scripts/raw_to_intermediate/02_extract_t_cells_and_shared_clonotypes.R`; `scripts/reproducibility/00_export_manuscript_panel_metrics.R` |
+| Supplementary Fig. 3-4 | T-cell clone-size distributions, paired-sample overlap, and patient-level clonotype expansion | `scripts/reproducibility/02b_generate_fig2c_screpertoire_alluvial.R`; clonotype count tables in Figshare |
+| Supplementary Fig. 5 | Shared-clonotype stem-like, terminal-differentiation, cytotoxic, MKI67, and CDKN2A expression | `scripts/raw_to_intermediate/02_extract_t_cells_and_shared_clonotypes.R`; `scripts/reproducibility/00_export_manuscript_panel_metrics.R` |
 | Supplementary Fig. 6A | GSE224445 PBMC processing, CD8 T-cell selection, and CXCR6 visualization | `scripts/analysis/03_process_external_pbmc_dataset.R`; `scripts/analysis/04_refine_external_cd8_annotation.R`; `scripts/analysis/05_generate_suppfig6a_cxcr6_umaps.R` |
 | Supplementary Fig. 13 | CD8 T-cell glycolysis-score visualization and gene-level paired results | `scripts/reproducibility/03_plot_suppfig13_from_metrics.R` |
 
@@ -32,19 +35,21 @@ Figure source data and standalone panel outputs are provided in the linked Figsh
 - **Matched cluster-frequency analysis:** `scripts/analysis/recompute_fig1g_limma.R` and `scripts/analysis/recompute_fig2b_from_latest_tcell_object.R` generate the Fig. 1G and Fig. 2B statistical tables.
 - **External PBMC analysis:** `scripts/analysis/03_process_external_pbmc_dataset.R` and `04_refine_external_cd8_annotation.R` process and annotate GSE224445; `05_generate_suppfig6a_cxcr6_umaps.R` generates the CXCR6 visualization inputs.
 - **Shared-clonotype trajectory:** `scripts/source_data_export/03_generate_shared_clone_monocle_trajectory.R` generates the Fig. 2I Monocle trajectory.
+- **Paired clonotype alluvial plots:** `scripts/reproducibility/02b_generate_fig2c_screpertoire_alluvial.R` uses the eight 10x filtered V(D)J contig annotation files to generate the four Fig. 2C patient panels.
 - **Panel reconstruction from released data:** `scripts/reproducibility/` redraws the supported panels using the lightweight Figshare metrics.
 
 ## Input guide
 
 - Most panel plotting and statistical scripts use the lightweight metrics and tables released through Figshare.
 - Object-level analyses, including the shared-clonotype trajectory and CXCR6 visualization, use processed objects generated by the upstream workflows.
+- Fig. 2C uses the eight `filtered_contig_annotations.csv` files from the matched PBMC and graft V(D)J libraries. Copy and edit `scripts/reproducibility/fig2c_filtered_contig_manifest_template.csv` before running the scRepertoire script.
 - Raw GSE319007 single-cell and TCR inputs enter through `scripts/raw_to_intermediate/`; GSE224445 inputs enter through the external PBMC scripts in `scripts/analysis/`.
 
-Software dependencies are listed in `environment.yml`. The released metrics and tables are available at https://doi.org/10.6084/m9.figshare.33135038.v1.
+Software dependencies are listed in `environment.yml`. Install `scRepertoire` from the matching Bioconductor release if it is not already present. The released figures, metrics, and tables are available at https://doi.org/10.6084/m9.figshare.33135038.
 
 ## Data access
 
 - GSE319007: matched scRNA-seq and TCR-seq.
 - GSE319298: CUT&Tag.
 - GSE224445: external PBMC scRNA-seq.
-- Figshare source-data record: https://doi.org/10.6084/m9.figshare.33135038.v1
+- Figshare source-data record: https://doi.org/10.6084/m9.figshare.33135038

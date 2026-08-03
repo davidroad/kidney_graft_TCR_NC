@@ -1,0 +1,9 @@
+sample,filtered_contig_annotations
+PBMC_0825,/path/to/PBMC_0825/filtered_contig_annotations.csv
+PBMC_0712,/path/to/PBMC_0712/filtered_contig_annotations.csv
+PBMC_0701,/path/to/PBMC_0701/filtered_contig_annotations.csv
+PBMC_0708,/path/to/PBMC_0708/filtered_contig_annotations.csv
+graft_0825,/path/to/graft_0825/filtered_contig_annotations.csv
+graft_0712,/path/to/graft_0712/filtered_contig_annotations.csv
+graft_0701,/path/to/graft_0701/filtered_contig_annotations.csv
+graft_0708,/path/to/graft_0708/filtered_contig_annotations.csv
