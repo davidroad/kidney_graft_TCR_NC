@@ -59,6 +59,9 @@ heatmap_panel <- function(metric_file, filename, subdir, width, height) {
   cluster_cols <- setNames(hcl.colors(nlevels(data$cluster_id), "Dynamic"), levels(data$cluster_id))
   strip <- ggplot(data, aes(x, 1, fill = cluster_id)) +
     geom_raster() +
+    geom_vline(xintercept = breaks, colour = "white", linewidth = 0.65) +
+    annotate("rect", xmin = 0.5, xmax = nrow(data) + 0.5,
+             ymin = 0.5, ymax = 1.5, fill = NA, colour = "black", linewidth = 0.25) +
     scale_fill_manual(values = cluster_cols, drop = FALSE) +
     theme_void(base_size = 7) +
     guides(fill = guide_legend(title = "Cluster", nrow = 2))
