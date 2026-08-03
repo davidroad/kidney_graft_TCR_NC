@@ -19,12 +19,12 @@ Figure source data and standalone panel outputs are provided in the linked Figsh
 
 ## Figure and script map
 
-| Figure | Main analysis | Script location |
+| Figure | Main analysis | Code or source-data location |
 |---|---|---|
 | Fig. 1 | All-CD45 atlas, sample and tissue distributions, marker summaries, and cluster proportions | `scripts/source_data_export/02_export_all_cd45_main_figure_source_tables.R`; `scripts/reproducibility/01_plot_figure1_from_metrics.R`; `scripts/analysis/recompute_fig1g_limma.R` |
 | Fig. 2 | T-cell atlas, paired graft-PBMC clonotype alluvial plots, shared-clonotype expression, differential expression, and trajectory analysis | `scripts/source_data_export/01_export_tcell_main_figure_source_tables.R`; `scripts/source_data_export/03_generate_shared_clone_monocle_trajectory.R`; `scripts/reproducibility/02_plot_figure2_from_metrics.R`; `scripts/reproducibility/02b_generate_fig2c_screpertoire_alluvial.R`; `scripts/analysis/recompute_fig2b_from_latest_tcell_object.R` |
 | Supplementary Fig. 1-2 | Per-sample all-CD45 and T-cell UMAP projections and cluster marker summaries | `scripts/raw_to_intermediate/01_build_primary_all_cell_object.R`; `scripts/raw_to_intermediate/02_extract_t_cells_and_shared_clonotypes.R`; `scripts/reproducibility/00_export_manuscript_panel_metrics.R` |
-| Supplementary Fig. 3-4 | T-cell clone-size distributions, paired-sample overlap, and patient-level clonotype expansion | `scripts/reproducibility/02b_generate_fig2c_screpertoire_alluvial.R`; clonotype count tables in Figshare |
+| Supplementary Fig. 3-4 | T-cell clone-size distributions, paired-sample overlap, and patient-level clonotype expansion | The clonotype count source table is in Figshare; `scripts/reproducibility/02b_generate_fig2c_screpertoire_alluvial.R` documents the corresponding V(D)J input format and patient pairing. |
 | Supplementary Fig. 5 | Shared-clonotype stem-like, terminal-differentiation, cytotoxic, MKI67, and CDKN2A expression | `scripts/raw_to_intermediate/02_extract_t_cells_and_shared_clonotypes.R`; `scripts/reproducibility/00_export_manuscript_panel_metrics.R` |
 | Supplementary Fig. 6A | GSE224445 PBMC processing, CD8 T-cell selection, and CXCR6 visualization | `scripts/analysis/03_process_external_pbmc_dataset.R`; `scripts/analysis/04_refine_external_cd8_annotation.R`; `scripts/analysis/05_generate_suppfig6a_cxcr6_umaps.R` |
 | Supplementary Fig. 13 | CD8 T-cell glycolysis-score visualization and gene-level paired results | `scripts/reproducibility/03_plot_suppfig13_from_metrics.R` |
