@@ -17,7 +17,6 @@ save_pdf <- function(plot, name, width, height) {
 
 tcell <- read_metric("fig2_tcell_umap_annotations.csv.gz")
 shared <- read_metric("fig2_shared_clone_umap_expression.csv.gz")
-clones <- read_metric("fig2c_shared_clonotype_abundance.csv")
 de <- read_metric("fig2f_shared_clone_graft_vs_pbmc_de.csv")
 
 umap_theme <- theme_void(base_size = 9) + theme(
@@ -35,19 +34,6 @@ p_a <- ggplot(tcell, aes(UMAP_1, UMAP_2, color = cluster)) +
   scale_color_manual(values = cluster_colors, na.value = "grey75") +
   coord_equal() + umap_theme
 save_pdf(p_a, "fig2a_tcell_cluster_umap.pdf", 8.5, 6.0)
-
-rank_source <- aggregate(n_cells ~ patient + clonotype, clones, sum)
-rank_source <- rank_source[order(rank_source$patient, -rank_source$n_cells), ]
-top_ids <- unlist(lapply(split(rank_source, rank_source$patient), function(x) head(x$clonotype, 15)), use.names = FALSE)
-clone_plot <- clones[clones$clonotype %in% top_ids, ]
-p_c <- ggplot(clone_plot, aes(tissue, relative_frequency, group = clonotype, color = tissue)) +
-  geom_line(color = "grey75", linewidth = 0.25) +
-  geom_point(size = 0.8, alpha = 0.8) +
-  facet_wrap(~ patient, nrow = 1) +
-  scale_color_manual(values = c(PBMC = "#B2182B", Graft = "#2166AC")) +
-  labs(x = NULL, y = "Relative clonotype frequency") +
-  theme_classic(base_size = 8) + theme(legend.position = "none", axis.text.x = element_text(angle = 30, hjust = 1))
-save_pdf(p_c, "fig2c_shared_clonotype_abundance.pdf", 9.5, 3.4)
 
 p_d <- ggplot(shared, aes(UMAP_1, UMAP_2, color = cluster)) +
   geom_point(size = 0.28, alpha = 0.9, stroke = 0) +
@@ -86,3 +72,4 @@ p_g <- wrap_plots(feature_plots, ncol = 1, guides = "keep")
 save_pdf(p_g, "fig2g_shared_clone_featureplots_split_tissue.pdf", 7.2, 12.0)
 
 message("Figure 2 metric-only panels written to ", normalizePath(output_dir))
+message("Fig. 2C is generated from filtered V(D)J contig annotations with scripts/reproducibility/02b_generate_fig2c_screpertoire_alluvial.R.")
