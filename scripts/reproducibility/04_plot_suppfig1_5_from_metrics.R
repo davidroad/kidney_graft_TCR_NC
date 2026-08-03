@@ -58,13 +58,23 @@ heatmap_panel <- function(metric_file, filename, subdir, width, height) {
   breaks <- breaks[breaks < nrow(data)] + 0.5
   cluster_cols <- setNames(hcl.colors(nlevels(data$cluster_id), "Dynamic"), levels(data$cluster_id))
   strip <- ggplot(data, aes(x, 1, fill = cluster_id)) +
-    geom_raster() +
+    geom_raster(key_glyph = "polygon") +
     geom_vline(xintercept = breaks, colour = "white", linewidth = 0.65) +
     annotate("rect", xmin = 0.5, xmax = nrow(data) + 0.5,
              ymin = 0.5, ymax = 1.5, fill = NA, colour = "black", linewidth = 0.25) +
     scale_fill_manual(values = cluster_cols, drop = FALSE) +
     theme_void(base_size = 7) +
-    guides(fill = guide_legend(title = "Cluster", nrow = 2))
+    theme(
+      legend.key = element_rect(fill = "white", colour = "grey30", linewidth = 0.35),
+      legend.key.spacing.x = grid::unit(2.5, "mm"),
+      legend.key.spacing.y = grid::unit(1.5, "mm"),
+      legend.text = element_text(margin = margin(r = 2))
+    ) +
+    guides(fill = guide_legend(
+      title = "Cluster", nrow = 2, byrow = TRUE,
+      keywidth = grid::unit(5, "mm"), keyheight = grid::unit(3.5, "mm"),
+      override.aes = list(colour = "grey30", linewidth = 0.35)
+    ))
   heat <- ggplot(long, aes(x, gene, fill = expression)) +
     geom_raster() +
     geom_vline(xintercept = breaks, colour = "white", linewidth = 0.18) +
@@ -73,7 +83,7 @@ heatmap_panel <- function(metric_file, filename, subdir, width, height) {
     labs(x = "Cells ordered by cluster", y = NULL) +
     theme_classic(base_size = 7) +
     theme(axis.ticks.y = element_blank())
-  p <- strip / heat + plot_layout(heights = c(0.7, 10), guides = "collect")
+  p <- strip / heat + plot_layout(heights = c(0.32, 10), guides = "collect")
   save_panel(p, subdir, filename, width, height)
 }
 
