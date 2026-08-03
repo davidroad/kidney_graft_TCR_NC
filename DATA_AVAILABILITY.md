@@ -13,6 +13,6 @@ data/processed/
   GSE224445_strict_cd8_seurat.rds
 ```
 
-Lightweight plotting metrics and statistical tables are supplied through Figshare:
+Lightweight plotting metrics and statistical tables are supplied through Figshare. Supplementary Figs. 1-5 can be redrawn from these compact files without the large processed objects:
 
-https://doi.org/10.6084/m9.figshare.33135038.v3
+https://doi.org/10.6084/m9.figshare.33135038.v4
