@@ -15,4 +15,4 @@ data/processed/
 
 Lightweight plotting metrics and statistical tables are supplied through Figshare:
 
-https://doi.org/10.6084/m9.figshare.33135038
+https://doi.org/10.6084/m9.figshare.33135038.v3
