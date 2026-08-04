@@ -2,11 +2,12 @@
 
 This repository contains the analysis code for the human scRNA-seq and TCR-seq results. The scripts build processed objects, export source data, run panel-level analyses, and reproduce figures from released metrics.
 
-Figure source data and standalone panel outputs are provided in the [Figshare source-data package](https://doi.org/10.6084/m9.figshare.33148562.v5).
+Figure source data and standalone panel outputs are provided in the [Figshare source-data package](https://doi.org/10.6084/m9.figshare.33148562.v6).
 
 ## Repository contents
 
 - `scripts/raw_to_intermediate/`: loads the scRNA-seq and TCR-seq inputs and builds the integrated all-CD45, T-cell, shared-clonotype, and CD8 objects.
+- `scripts/raw_to_intermediate/04_generate_cuttag_normalized_bigwigs.sh`: generates browser-ready CPM-normalized H3K27ac CUT&Tag BigWig tracks.
 - `scripts/source_data_export/`: exports primary figure source tables and the Fig. 2I Monocle trajectory.
 - `scripts/reproducibility/`: exports lightweight metrics and generates the released main and supplementary computational panels.
 - `scripts/analysis/`: runs the Fig. 1G/Fig. 2B statistics and the GSE224445 PBMC analysis used in Supplementary Fig. 6A.
@@ -19,10 +20,11 @@ Figure source data and standalone panel outputs are provided in the [Figshare so
 |---|---|---|
 | Fig. 1 | All-CD45 atlas, sample and tissue distributions, marker summaries, and cluster proportions | `scripts/source_data_export/02_export_all_cd45_main_figure_source_tables.R`; `scripts/reproducibility/01_plot_figure1_from_metrics.R`; `scripts/analysis/recompute_fig1g_limma.R` |
 | Fig. 2 | T-cell atlas, paired graft-PBMC clonotype alluvial plots, shared-clonotype expression, differential expression, and trajectory analysis | `scripts/source_data_export/01_export_tcell_main_figure_source_tables.R`; `scripts/source_data_export/03_generate_shared_clone_monocle_trajectory.R`; `scripts/reproducibility/02_plot_figure2_from_metrics.R`; `scripts/reproducibility/02b_generate_fig2c_screpertoire_alluvial.R`; `scripts/analysis/recompute_fig2b_from_latest_tcell_object.R` |
+| Fig. 3A-B | H3K27ac CUT&Tag genome-browser tracks at the indicated human CD8+ T-cell loci | `scripts/raw_to_intermediate/04_generate_cuttag_normalized_bigwigs.sh`; `scripts/raw_to_intermediate/cuttag_bam_manifest_template.tsv` |
 | Supplementary Fig. 1-2 | Per-sample all-CD45 and T-cell UMAP projections and cluster marker summaries | `scripts/reproducibility/04_plot_suppfig1_5_from_metrics.R`; `scripts/reproducibility/04_generate_suppfig1_2_from_objects.R` |
 | Supplementary Fig. 3-4 | T-cell clone-size distributions, paired-sample overlap, and patient-level clonotype expansion | `scripts/reproducibility/04_plot_suppfig1_5_from_metrics.R`; `scripts/reproducibility/05_generate_suppfig3_4_from_tcr_object.R` |
 | Supplementary Fig. 5 | Shared-clonotype stem-like, terminal-differentiation, cytotoxic, MKI67, and CDKN2A expression | `scripts/reproducibility/04_plot_suppfig1_5_from_metrics.R`; `scripts/reproducibility/06_generate_suppfig5_from_shared_object.R` |
-| Supplementary Fig. 6A | GSE224445 PBMC processing, CD8 T-cell selection, and CXCR6 visualization | `scripts/analysis/03_process_external_pbmc_dataset.R`; `scripts/analysis/04_refine_external_cd8_annotation.R`; `scripts/analysis/05_generate_suppfig6a_cxcr6_umaps.R` |
+| Supplementary Fig. 6A | GSE224445 PBMC processing, CD8 T-cell selection, CXCR6 visualization, and sample-level quantification | `scripts/analysis/03_process_external_pbmc_dataset.R`; `scripts/analysis/04_refine_external_cd8_annotation.R`; `scripts/analysis/05_generate_suppfig6a_cxcr6_umaps.R`; `scripts/reproducibility/05_plot_suppfig6a_from_metrics.R` |
 | Supplementary Fig. 13 | CD8 T-cell glycolysis-score visualization and gene-level paired results | `scripts/reproducibility/03_plot_suppfig13_from_metrics.R` |
 
 ## Custom analyses
@@ -33,6 +35,7 @@ Figure source data and standalone panel outputs are provided in the [Figshare so
 - **Shared-clonotype trajectory:** `scripts/source_data_export/03_generate_shared_clone_monocle_trajectory.R` generates the Fig. 2I Monocle trajectory.
 - **Paired clonotype alluvial plots:** `scripts/reproducibility/02b_generate_fig2c_screpertoire_alluvial.R` uses the eight 10x filtered V(D)J contig annotation files to generate the four Fig. 2C patient panels.
 - **Panel reconstruction from released data:** `scripts/reproducibility/` redraws the supported panels using the lightweight Figshare metrics.
+- **CUT&Tag signal tracks:** `scripts/raw_to_intermediate/04_generate_cuttag_normalized_bigwigs.sh` converts aligned GRCh38 BAM files into CPM-normalized BigWig tracks for Fig. 3A-B.
 - **Supplementary Fig. 1-5 panel reconstruction:** `04_plot_suppfig1_5_from_metrics.R` redraws all released panels from the small compressed metrics and tables supplied in Figshare. The `04_generate`, `05_generate`, and `06_generate` scripts document the upstream object-level exports.
 
 ## Input guide
@@ -42,6 +45,8 @@ Figure source data and standalone panel outputs are provided in the [Figshare so
 - The object-level exporters for Supplementary Figs. 1-2 use the integrated all-CD45 and T-cell objects. Those for Supplementary Figs. 3-4 use the T-cell object and its paired-chain clonotype list, and the Supplementary Fig. 5 exporter uses the shared-clonotype and CD8 T-cell objects. These large objects are not part of the Figshare deposit.
 - Fig. 2C uses the eight `filtered_contig_annotations.csv` files from the matched PBMC and graft V(D)J libraries. Copy and edit `scripts/reproducibility/fig2c_filtered_contig_manifest_template.csv` before running the scRepertoire script.
 - Raw GSE319007 single-cell and TCR inputs enter through `scripts/raw_to_intermediate/`; GSE224445 inputs enter through the external PBMC scripts in `scripts/analysis/`.
+- Fig. 3A-B uses aligned human GRCh38 H3K27ac CUT&Tag BAM files for graft-derived and matched PBMC-derived CD8+ T cells. Copy `scripts/raw_to_intermediate/cuttag_bam_manifest_template.tsv`, enter the local BAM paths, and run the BigWig script. `bamCoverage` applies CPM normalization with chromosome X ignored when calculating the normalization factor. The normalized tracks are loaded into a genome browser, and each indicated locus is displayed using a window extending 3 kb upstream and 3 kb downstream of the annotated gene.
+- Supplementary Fig. 6A can be plotted from its compressed UMAP metrics and sample-level CXCR6 frequency table using `scripts/reproducibility/05_plot_suppfig6a_from_metrics.R`.
 
 Software dependencies are listed in `environment.yml`. Install `scRepertoire` from the matching Bioconductor release if it is not already present.
 

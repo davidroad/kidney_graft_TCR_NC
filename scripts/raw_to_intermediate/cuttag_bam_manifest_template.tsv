@@ -1,0 +1,3 @@
+sample_id	condition	bam_path	output_filename
+Graft_CD8	Graft	/path/to/graft.sorted.bam	Graft_CD8_CPM.bw
+PBMC_CD8	PBMC	/path/to/pbmc.sorted.bam	PBMC_CD8_CPM.bw

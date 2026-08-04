@@ -22,8 +22,10 @@ dependencies:
   - r-biocmanager
   - r-monocle3
   - bioconductor-edger
+  - deeptools=3.5.1
   - python
   - pymupdf
   - pandas
   - numpy
   - matplotlib
+  - r-scales

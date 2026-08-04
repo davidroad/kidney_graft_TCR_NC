@@ -9,6 +9,7 @@ figures/
 *.csv
 !scripts/reproducibility/fig2c_filtered_contig_manifest_template.csv
 *.tsv
+!scripts/raw_to_intermediate/cuttag_bam_manifest_template.tsv
 *.xls
 *.xlsx
 *.RData
