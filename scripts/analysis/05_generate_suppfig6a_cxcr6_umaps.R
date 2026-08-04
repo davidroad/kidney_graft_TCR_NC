@@ -182,10 +182,15 @@ ggsave(
   device = cairo_pdf
 )
 
-write.csv(
-  plot_data[c("cell", "UMAP_1", "UMAP_2", "condition", "dataset", "CXCR6_relative")],
+metrics_connection <- gzfile(
   file.path(output_dir, "suppfig6a_cxcr6_umap_plotting_data.csv.gz"),
+  open = "wt"
+)
+write.csv(
+  plot_data[c("UMAP_1", "UMAP_2", "condition", "dataset", "CXCR6_relative")],
+  metrics_connection,
   row.names = FALSE
 )
+close(metrics_connection)
 
 message("Supplementary Fig. 6A CXCR6 UMAP output written to ", normalizePath(output_dir))

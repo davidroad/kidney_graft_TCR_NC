@@ -17,6 +17,14 @@ Create a local `sample_manifest.csv` that is not committed to GitHub. Each row s
 
 The manifest is a local input configuration and must remain outside version control.
 
+For Fig. 3A-B, copy `cuttag_bam_manifest_template.tsv` and provide the two aligned human GRCh38 H3K27ac CUT&Tag BAM paths. Run:
+
+```bash
+bash 04_generate_cuttag_normalized_bigwigs.sh cuttag_bam_manifest.tsv results/cuttag_bigwig 4
+```
+
+The script uses deepTools `bamCoverage` v3.5.1 with CPM normalization and ignores chromosome X when calculating the normalization factor. Browser views of the indicated loci use 3 kb upstream and downstream of the annotated gene.
+
 ## Outputs
 
 - `merged_4_with_vdj_9_24_2025.RData`: merged all-cell/all-immune object with TCR metadata.
